@@ -1,0 +1,124 @@
+[
+    {
+        "name": "morozovsk/websocket",
+        "version": "4.2.2",
+        "version_normalized": "4.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/morozovsk/websocket.git",
+            "reference": "034a514ec64eed9be3cb6fc9f4b22f67216f71ab"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/morozovsk/websocket/zipball/034a514ec64eed9be3cb6fc9f4b22f67216f71ab",
+            "reference": "034a514ec64eed9be3cb6fc9f4b22f67216f71ab",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "php": ">=5.3.0"
+        },
+        "time": "2017-02-24T10:13:40+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "morozovsk\\websocket\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "simple chat (single daemon)",
+                "homepage": "http://sharoid.ru/chat.html"
+            },
+            {
+                "name": "pro chat (master + worker)",
+                "homepage": "http://sharoid.ru/chat2.html"
+            },
+            {
+                "name": "simple game",
+                "homepage": "http://sharoid.ru/game.html"
+            }
+        ],
+        "description": "simple php websocket server with examples and demo: simple chat (single daemon) - http://sharoid.ru/chat.html , pro chat (master + worker) - http://sharoid.ru/chat2.html , simple game - http://sharoid.ru/game.html",
+        "homepage": "http://sharoid.ru/game.html",
+        "keywords": [
+            "chat",
+            "demo",
+            "event",
+            "examle",
+            "game",
+            "laravel",
+            "libevent",
+            "server",
+            "socket_select",
+            "websocket",
+            "yii"
+        ]
+    },
+    {
+        "name": "morozovsk/websocket-examples",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/morozovsk/websocket-examples.git",
+            "reference": "3a3e3e1ba591dc0c1b1449ce3e00ec0a942b9e94"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/morozovsk/websocket-examples/zipball/3a3e3e1ba591dc0c1b1449ce3e00ec0a942b9e94",
+            "reference": "3a3e3e1ba591dc0c1b1449ce3e00ec0a942b9e94",
+            "shasum": ""
+        },
+        "require": {
+            "morozovsk/websocket": ">=3.0",
+            "php": ">=5.3.0"
+        },
+        "time": "2015-09-06T17:29:54+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "morozovsk\\websocket\\examples\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "simple chat (single daemon)",
+                "homepage": "http://sharoid.ru/chat.html"
+            },
+            {
+                "name": "pro chat (master + worker)",
+                "homepage": "http://sharoid.ru/chat2.html"
+            },
+            {
+                "name": "simple game",
+                "homepage": "http://sharoid.ru/game.html"
+            }
+        ],
+        "description": "examples for simple php websocket server: simple chat (single daemon) - http://sharoid.ru/chat.html , pro chat (master + worker) - http://sharoid.ru/chat2.html , simple game - http://sharoid.ru/game.html",
+        "homepage": "http://sharoid.ru/game.html",
+        "keywords": [
+            "chat",
+            "demo",
+            "event",
+            "examle",
+            "game",
+            "laravel",
+            "libevent",
+            "server",
+            "socket_select",
+            "websocket",
+            "yii"
+        ]
+    }
+]
