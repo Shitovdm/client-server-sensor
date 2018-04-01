@@ -4,9 +4,9 @@
 
 1. Use ubuntu-16.04.4-desktop-i386;
 2. Install LAMP:
-```sudo apt-get install lamp-server^ phpmyadmin```
-```sudo /etc/init.d/apache2 start```
-```sudo chmod -R 777 /var/www```
+```sudo apt-get install lamp-server^ phpmyadmin ```
+```sudo /etc/init.d/apache2 start ```
+```sudo chmod -R 777 /var/www ```
 3. Install FTP-server:
 ```sudo apt-get install vsftpd```
 ```sudo systemctl start vsftpd```
