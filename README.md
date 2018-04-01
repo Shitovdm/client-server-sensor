@@ -2,46 +2,46 @@
 
 <h3>Server Start</h3>
 
-1. Use ubuntu-16.04.4-desktop-i386;
-2. Install LAMP:
-```sudo apt-get install lamp-server^ phpmyadmin ```
-```sudo /etc/init.d/apache2 start ```
-```sudo chmod -R 777 /var/www ```
-3. Install FTP-server:
-```sudo apt-get install vsftpd```
-```sudo systemctl start vsftpd```
-```sudo systemctl enable vsftpd```
-```sudo ufw allow 20/tcp```
-```sudo ufw allow 21/tcp```
-```sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.orig```
-```sudo nano /etc/vsftpd.conf```
-8. Edit ib /etc/vsftpd.conf:
-```anonymous_enable = NO```
-```local_enable = YES```
-```write_enable = YES```
-```local_umask = 022```
-```dirmessage_enable = YES```
-```xferlog_enable = YES```
-```xferlog_std_format=YES```
-```connect_from_port_20 = YES```
-```listen=YES```
-```listen_ipv6=NO```
-```pam_service_name=vsftpd```
-```userlist_enable = YES```
-```userlist_file=/etc/vsftpd.userlist```
-```userlist_deny=NO```
-9. Create new user:
-```sudo useradd -m -c "Test User" -s /bin/bash testuser```
-```sudo passwd testuser```
-```echo "testuser" | sudo tee -a /etc/vsftpd.userlist```
-```cat /etc/vsftpd.userlist```
-4. Restart FTP-server
-5. Paste all project files into /var/www/html
-6. Start LAMP:
-```sudo /etc/init.d/apache2 start```
-7. Move to server/index.php folder and start php server:
-```cd /var/www/html/sensor-main/vendor/morozovsk/websocket-examples/chat/server/```
-```php index.php start```
+1. Use ubuntu-16.04.4-desktop-i386;  
+2. Install LAMP:  
+```sudo apt-get install lamp-server^ phpmyadmin```  
+```sudo /etc/init.d/apache2 start```  
+```sudo chmod -R 777 /var/www```  
+3. Install FTP-server:  
+```sudo apt-get install vsftpd```  
+```sudo systemctl start vsftpd```  
+```sudo systemctl enable vsftpd```  
+```sudo ufw allow 20/tcp```  
+```sudo ufw allow 21/tcp```  
+```sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.orig```  
+```sudo nano /etc/vsftpd.conf```  
+8. Edit ib /etc/vsftpd.conf:  
+```anonymous_enable = NO```  
+```local_enable = YES```  
+```write_enable = YES```  
+```local_umask = 022```  
+```dirmessage_enable = YES```  
+```xferlog_enable = YES```  
+```xferlog_std_format=YES```  
+```connect_from_port_20 = YES```  
+```listen=YES```  
+```listen_ipv6=NO```  
+```pam_service_name=vsftpd```  
+```userlist_enable = YES```  
+```userlist_file=/etc/vsftpd.userlist```  
+```userlist_deny=NO```  
+9. Create new user:  
+```sudo useradd -m -c "Test User" -s /bin/bash testuser```  
+```sudo passwd testuser```  
+```echo "testuser" | sudo tee -a /etc/vsftpd.userlist```  
+```cat /etc/vsftpd.userlist```  
+4. Restart FTP-server;  
+5. Paste all project files into /var/www/html;  
+6. Start LAMP:  
+```sudo /etc/init.d/apache2 start```  
+7. Move to server/index.php folder and start php server:  
+```cd /var/www/html/sensor-main/vendor/morozovsk/websocket-examples/chat/server/```  
+```php index.php start```  
 
 > Links
 >> http://linux-user.ru/distributivy-linux/programmy-dlya-linux/lokalnyj-server-lamp-dlya-ubuntu-linux-mint/
