@@ -16,20 +16,20 @@
     3.6. sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.orig
     3.7. sudo nano /etc/vsftpd.conf
     3.8. Edit:
-        3.8.1. anonymous_enable = NO
-        3.8.2. local_enable = YES
-        3.8.3. write_enable = YES
-        3.8.4. local_umask = 022
-        3.8.5. dirmessage_enable = YES
-        3.8.6. xferlog_enable = YES
-        3.8.7. xferlog_std_format=YES
-        3.8.8. connect_from_port_20 = YES
-        3.8.9. listen=YES
-        3.8.10.  listen_ipv6=NO
-        3.8.11.  pam_service_name=vsftpd
-        3.8.12.  userlist_enable = YES
-        3.8.13.  userlist_file=/etc/vsftpd.userlist
-        3.8.14.  userlist_deny=NO
+        1. anonymous_enable = NO
+        2. local_enable = YES
+        3. write_enable = YES
+        4. local_umask = 022
+        5. dirmessage_enable = YES
+        6. xferlog_enable = YES
+        7. xferlog_std_format=YES
+        8. connect_from_port_20 = YES
+        9. listen=YES
+        10.  listen_ipv6=NO
+        11.  pam_service_name=vsftpd
+        12.  userlist_enable = YES
+        13.  userlist_file=/etc/vsftpd.userlist
+        14.  userlist_deny=NO
     3.9. Create new user:
         3.9.1  sudo useradd -m -c "Test User" -s /bin/bash testuser
         3.9.2.  sudo passwd testuser
