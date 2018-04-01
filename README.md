@@ -1,7 +1,7 @@
 # client-server-sensor
 
-<h3>Server Tuning</h3>
-```
+<h3>Server Start</h3>
+
 1. Use ubuntu-16.04.4-desktop-i386;
 2. Install LAMP:
     2.1. sudo apt-get install lamp-server^ phpmyadmin
@@ -42,7 +42,7 @@
 7. Move to server/index.php folder and start php server:
     7.1. cd /var/www/html/sensor-main/vendor/morozovsk/websocket-examples/chat/server/
     7.2. php index.php start
-```
+
 > Links
 >> http://linux-user.ru/distributivy-linux/programmy-dlya-linux/lokalnyj-server-lamp-dlya-ubuntu-linux-mint/
 >> http://rus-linux.net/MyLDP/server/ftp.html
