@@ -41,7 +41,12 @@
 ```sudo /etc/init.d/apache2 start```  
 7. Move to server/index.php folder and start php server:  
 ```cd /var/www/html/sensor-main/vendor/morozovsk/websocket-examples/chat/server/```  
-```php index.php start```  
+```php index.php start``` 
+
+<h3>Wi-Fi Access Point Setup</h3>
+
+1. Install libpam-radius-auth:
+```sudo apt-get install hostapd libpam-radius-auth```  
 
 > Links
 >> http://linux-user.ru/distributivy-linux/programmy-dlya-linux/lokalnyj-server-lamp-dlya-ubuntu-linux-mint/
