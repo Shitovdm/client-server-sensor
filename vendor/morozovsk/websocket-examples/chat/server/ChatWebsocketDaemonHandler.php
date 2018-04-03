@@ -25,12 +25,15 @@ class ChatWebsocketDaemonHandler extends \morozovsk\websocket\Daemon
         if (!strlen($data)) {
             return;
         }
-        $message = $this->counter++;
-        
-
-        foreach ($this->clients as $clientId => $client) {
-            $this->sendToClient($clientId, $message);
+        if($data !== "0"){
+            $message = $this->counter++;
+            echo($data . " " . $message . " ");
+            
+            foreach ($this->clients as $clientId => $client) {
+                $this->sendToClient($clientId, $message);
+            }
         }
+        
     }
     protected function onMasterClose($connectionId) {}
 }

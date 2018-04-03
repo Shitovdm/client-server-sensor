@@ -8,6 +8,16 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <title>demo data</title>
+    <style>
+        #chat{
+            float:right;
+            width:40%;
+            overflow: scroll;
+            border:1px solid #ccc;
+            background-color: #f1f1f1;
+            max-height: 400px;
+        }
+    </style>
     <script>
         $(function(){
 
@@ -21,10 +31,12 @@
                     setTimeout(wsStart, 1000);
                 };
                 ws.onmessage = function(evt) { 
-                    $("#data").html("<b>"+evt.data+"</b>"); 
+                    $("#data").append("<b>"+evt.data+"</b>  "); 
                     if(evt.data !== undefined){
                         if(evt.data <= 1000){
                             ws.send("1");
+                        }else{
+                            ws.send("0");
                         }
                         
                     }
