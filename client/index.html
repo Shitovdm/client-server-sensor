@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Course meter</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    
+    <script type="text/javascript" src="js/native/jquery.min.js"></script>
+    <script type="text/javascript" src="js/native/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/native/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/native/knockout-2.2.1.js"></script>
+    <script type="text/javascript" src="js/inbuild/seven-segments.js"></script>
+    
+    
+    
+</head>
+
+<body>
+    <div id="wrapper">
+	<svg id="meter">
+	    <circle id="outline_curves" class="circle outline"  cx="50%" cy="50%"></circle>
+            <!-- Left half of circle half.-->
+	    <circle id="low" class="circle range" cx="50%" cy="50%" stroke="#E04644"></circle>
+	    <circle id="avg" class="circle range" cx="50%" cy="50%" stroke="#FDE47F"></circle>
+	    <circle id="high" class="circle range" cx="50%" cy="50%" stroke="#5ce777"></circle>
+            <!-- Right half of circle half.-->
+            <circle id="high-2" class="circle range" cx="50%" cy="50%" stroke="#5ce777"></circle>
+            <circle id="avg-2" class="circle range" cx="50%" cy="50%" stroke="#FDE47F"></circle>
+            <circle id="low-2" class="circle range" cx="50%" cy="50%" stroke="#E04644"></circle>
+            
+            <path id="dividing" d="M75,300 a80,80 0 1,0 450,0" fill="#E79A16" />
+            <path id="dividing-big" d="M100,300 a80,80 0 1,0 400,0" fill="#E79A16" />
+            
+            <text class="text" x="30" y="-296" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">-30</text>
+            <text class="text" x="60" y="-420" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">-20</text>
+            <text class="text" x="150" y="-515" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">-10</text>
+            
+            <text class="text" x="295" y="-550" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">0</text>
+            
+            <text class="text" x="560" y="-296" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">30</text>
+            <text class="text" x="530" y="-420" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">20</text>
+            <text class="text" x="440" y="-515" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">10</text>
+            
+	    <circle id="outline_ends" class="circle outline" cx="50%" cy="50%"></circle>
+	</svg>
+	<img id="meter_needle" src="svg/svg-meter-gauge-needle.svg" alt="">
+        <input id="slider" type="range" min="-100" max="100" value="0" hidden=""/> 
+        <div class="segment-indicator" style="width: 250px; position: relative; top: -230px; left: 180px;">
+            <div id="exampleArray"></div>
+        </div>
+	</div>
+    <script type="text/javascript" src="js/inbuild/main.js"></script>
+</body>
+
+</html>
