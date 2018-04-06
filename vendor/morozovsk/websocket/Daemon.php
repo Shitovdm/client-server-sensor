@@ -273,6 +273,7 @@ abstract class Daemon extends Generic
     protected function onOpen($connectionId, $info) {}
     protected function onClose($connectionId) {}
     protected function onMessage($connectionId, $packet, $type) {}
+    
 
     protected function onServiceMessage($connectionId, $data) {}
     protected function onServiceOpen($connectionId) {}
