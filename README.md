@@ -71,8 +71,8 @@ For example http://192.168.1.47/sensor-main/vendor/morozovsk/websocket-examples/
 
 ***
 > Resources:
->> https://github.com/morozovsk/websocket 
->> https://github.com/Xowap/PHP-Serial 
->> https://github.com/hongkiat/svg-meter-gauge 
+>> https://github.com/morozovsk/websocket  
+>> https://github.com/Xowap/PHP-Serial  
+>> https://github.com/hongkiat/svg-meter-gauge  
 
   
