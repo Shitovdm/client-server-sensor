@@ -1,5 +1,11 @@
 # client-server-sensor
 
+This client-server application is designed to visualize data from the sensor on the client device.
+
+### Structural scheme
+![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/img/screen.PNG)
+***
+
 <h3>Server Start</h3>
 
 1. Use ubuntu-16.04.4-desktop-i386;  
@@ -58,4 +64,12 @@
 
 1. Go to local server address
 For example http://192.168.1.47/sensor-main/vendor/morozovsk/websocket-examples/chat/client/
+
+
+***
+> Resources:
+>> https://github.com/morozovsk/websocket
+>> https://github.com/Xowap/PHP-Serial
+>> https://github.com/hongkiat/svg-meter-gauge
+
   
