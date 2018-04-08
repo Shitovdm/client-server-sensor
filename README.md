@@ -2,8 +2,11 @@
 
 This client-server application is designed to visualize data from the sensor on the client device.
 
-### Structural scheme
-![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/img/screen.PNG)
+### Generalized structural scheme
+![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/Scheme-1.PNG)
+
+### Detailed structural scheme
+![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/Scheme-2.PNG)
 ***
 
 <h3>Server Start</h3>
