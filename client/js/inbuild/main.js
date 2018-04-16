@@ -44,17 +44,15 @@ var mask = document.querySelector('#mask');
 var meter_needle = document.querySelector('#meter_needle');
 function range_change_event(value) {
     var percent = value;
-    var meter_value = semi_cf - ((percent * semi_cf) / 100);
+    var meter_value = 0 + ((percent * 90) / 300);
+    
+    
     
     meter_needle.style.transform = 'rotate(' + (0 + ((percent * 90) / 300)) + 'deg)';
-    //lbl.textContent = percent/10;
-    var segmentValue = 0;
-    if( (percent / 10) % 1 === 0 ){
-        segmentValue = percent/10 + ".0";
-    }else{
-         segmentValue = percent/10;
-    }
-    $("#exampleArray").sevenSeg({ value: segmentValue }); 
+
+    var segmentValue = percent/10;
+    console.log((segmentValue).toFixed(1));
+    $("#exampleArray").sevenSeg({ value: segmentValue.toFixed(1) }); 
 }
 
 var measuringLimit  = 30;   //  Предел измерения.
@@ -97,14 +95,16 @@ setInterval(function(){
             setTimeout(wsStart, 1000);
         };
         ws.onmessage = function(evt) { 
-            console.log(evt.data);
+            //console.log(evt.data);
             //$("#data").append("<b>"+evt.data+"</b>  "); 
             if(evt.data !== undefined){
-                var value = parseFloat((evt.data * 10).toFixed(1));
+                var value = (((evt.data)*60) * 10).toFixed(1);
+                console.log(value);
+                //console.log(value);
                 range_change_event(value);
-                /*setTimeout(function(){
+                setTimeout(function(){
                     ws.send("1");   //  Продолжаем принимать данные.
-                }, 100);*/
+                }, 20);
                 /*if(evt.data <= 10){
                     ws.send("1");   //  Флаг приема данных.
                 }else{
