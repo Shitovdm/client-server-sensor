@@ -42,42 +42,32 @@ var slider = document.querySelector('#slider');
 var lbl = document.querySelector("#lbl");
 var mask = document.querySelector('#mask');
 var meter_needle = document.querySelector('#meter_needle');
+
 function range_change_event(value) {
     var percent = value;
     var meter_value = 0 + ((percent * 90) / 300);
+    var angle = 0;
+    if(percent > 300){
+        angle = 90;
+    }else{
+        if(percent < -300){
+            angle = -90;
+        }else{
+            angle = (percent * 90) / 300;
+        }
+    }
+    meter_needle.style.transform = 'rotate(' + angle + 'deg)';
     
-    
-    
-    meter_needle.style.transform = 'rotate(' + (0 + ((percent * 90) / 300)) + 'deg)';
+    //meter_needle.style.transform = 'rotate(' + (0 + ((percent * 90) / 300)) + 'deg)';
 
-    var segmentValue = percent/10;
+    var segmentValue = percent / 10;
     console.log((segmentValue).toFixed(1));
     $("#exampleArray").sevenSeg({ value: segmentValue.toFixed(1) }); 
 }
 
-var measuringLimit  = 30;   //  Предел измерения.
 var value = 0;  //  Значение.
 
-
-//  Заглушка приема данных.
-
-/*var direction = false;  //  Направление движения стрелки.
-setInterval(function(){
-    range_change_event(value);
-    if((value >= measuringLimit*(-10)) && (!direction)){
-        value = value - 1;
-    }else{
-        if(value <= measuringLimit * 10){
-            value = value + 1;
-            direction = true;
-        }else{
-            direction = false;
-        }
-    }
-},100);*/
-
  $("#exampleArray").sevenSeg({ digits: 4, value: 0 });       
- 
  
  $(function(){
     function wsStart() {
@@ -86,8 +76,6 @@ setInterval(function(){
         ws.onopen = function() { 
            // $("#chat").append("<p>Клиент: соединение открыто</p>");
             console.log("Клиент: соединение открыто.");
-
-            
         };
         ws.onclose = function() { 
             console.log("Клиент: соединение закрыто, пытаюсь переподключиться.");
@@ -95,21 +83,14 @@ setInterval(function(){
             setTimeout(wsStart, 1000);
         };
         ws.onmessage = function(evt) { 
-            //console.log(evt.data);
-            //$("#data").append("<b>"+evt.data+"</b>  "); 
             if(evt.data !== undefined){
-                var value = (((evt.data)*60) * 10).toFixed(1);
+                var value = (evt.data * 60).toFixed(1);
                 console.log(value);
                 //console.log(value);
                 range_change_event(value);
                 setTimeout(function(){
                     ws.send("1");   //  Продолжаем принимать данные.
                 }, 20);
-                /*if(evt.data <= 10){
-                    ws.send("1");   //  Флаг приема данных.
-                }else{
-                    ws.send("0");
-                }*/
             }
         };
     }
