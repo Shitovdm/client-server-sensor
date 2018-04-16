@@ -73,9 +73,10 @@ For example http://192.168.1.47/sensor-main/vendor/morozovsk/websocket-examples/
 
 
 ***
-> Resources:
->> https://github.com/morozovsk/websocket  
->> https://github.com/Xowap/PHP-Serial  
->> https://github.com/hongkiat/svg-meter-gauge  
+> **Resources**:
+>> **https://github.com/morozovsk/websocket** - PHP Websocket Class.  
+>> **https://github.com/Xowap/PHP-Serial** - PHP Serial Class.  
+>> **https://github.com/hongkiat/svg-meter-gauge** - Simple SVG-meter.  
+>> **https://github.com/meetanthony/crcphp** - Calculating CRC32 Class.  
 
   
