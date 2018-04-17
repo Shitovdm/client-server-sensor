@@ -1,14 +1,22 @@
 
 
-//  Диапазоны измерения.
-var limit = 300;     //  +-30 град/мин.
-$("#division_3_3").text(limit);
-$("#division_2_3").text((limit/3)*2);
-$("#division_1_3").text(limit/3);
+var limit = 60;     //  +-30 град/мин.
 
-$("#division_M3_3").text(-limit);
-$("#division_M2_3").text(-(limit/3)*2);
-$("#division_M1_3").text(-limit/3);
+function setLimit(value){
+    console.log("Set limit: ",value);
+    limit = value;
+    $("#division_3_3").text(limit);
+    $("#division_2_3").text((limit/3)*2);
+    $("#division_1_3").text(limit/3);
+
+    $("#division_M3_3").text(-limit);
+    $("#division_M2_3").text(-(limit/3)*2);
+    $("#division_M1_3").text(-limit/3);
+}
+
+//  Диапазоны измерения.
+
+
 
 /* set radius for all circles */
 var r = 200;
@@ -54,23 +62,23 @@ var meter_needle = document.querySelector('#meter_needle');
 
 function range_change_event(value) {
     var percent = value;
-    console.log(percent);
     //var percent = 20;
     var angle = 0;
     //  Граничные значения поворота стрелки.
     if(percent > limit){  //  Крайнее правое положение.
-        angle = 90;
+        angle = 90.0;
     }else{
         if(percent < -limit){ //  Кранее левое положение.
-            angle = -90;
+            angle = -90.0;
         }else{
             angle = (percent * 90) / limit;
         }
     }
     //  Поворачиваем стрелку.
     meter_needle.style.transform = 'rotate(' + angle + 'deg)';
+    console.log(value);
     //  Изменяем семисегментное значение.
-    $("#exampleArray").sevenSeg({ value: percent }); 
+    $("#exampleArray").sevenSeg({ value: angle.toFixed(1) }); 
 }
 
 var value = 0;  //  Значение.
@@ -84,6 +92,7 @@ var value = 0;  //  Значение.
         ws.onopen = function() { 
            // $("#chat").append("<p>Клиент: соединение открыто</p>");
             console.log("Клиент: соединение открыто.");
+             ws.send("1");
         };
         ws.onclose = function() { 
             console.log("Клиент: соединение закрыто, пытаюсь переподключиться.");
@@ -91,14 +100,15 @@ var value = 0;  //  Значение.
             setTimeout(wsStart, 1000);
         };
         ws.onmessage = function(evt) { 
+           
             if(evt.data !== undefined && evt.data !== null){
                 var value = (evt.data * 60).toFixed(1); // град/мин.
                 //console.log(value);
                 //console.log(value);
                 range_change_event(value);
-                setTimeout(function(){
-                    ws.send("1");   //  Продолжаем принимать данные.
-                }, 20);
+                //setTimeout(function(){
+                       //  Продолжаем принимать данные.
+                //}, 20);
             }
         };
     }
