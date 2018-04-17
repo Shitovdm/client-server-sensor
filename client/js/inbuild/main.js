@@ -1,9 +1,18 @@
 
 
+//  Диапазоны измерения.
+var limit = 300;     //  +-30 град/мин.
+$("#division_3_3").text(limit);
+$("#division_2_3").text((limit/3)*2);
+$("#division_1_3").text(limit/3);
 
+$("#division_M3_3").text(-limit);
+$("#division_M2_3").text(-(limit/3)*2);
+$("#division_M1_3").text(-limit/3);
 
 /* set radius for all circles */
 var r = 200;
+
 
 var circles = document.querySelectorAll('.circle');
 var total_circles = circles.length;
@@ -45,24 +54,23 @@ var meter_needle = document.querySelector('#meter_needle');
 
 function range_change_event(value) {
     var percent = value;
-    var meter_value = 0 + ((percent * 90) / 300);
+    console.log(percent);
+    //var percent = 20;
     var angle = 0;
-    if(percent > 300){
+    //  Граничные значения поворота стрелки.
+    if(percent > limit){  //  Крайнее правое положение.
         angle = 90;
     }else{
-        if(percent < -300){
+        if(percent < -limit){ //  Кранее левое положение.
             angle = -90;
         }else{
-            angle = (percent * 90) / 300;
+            angle = (percent * 90) / limit;
         }
     }
+    //  Поворачиваем стрелку.
     meter_needle.style.transform = 'rotate(' + angle + 'deg)';
-    
-    //meter_needle.style.transform = 'rotate(' + (0 + ((percent * 90) / 300)) + 'deg)';
-
-    var segmentValue = percent / 10;
-    console.log((segmentValue).toFixed(1));
-    $("#exampleArray").sevenSeg({ value: segmentValue.toFixed(1) }); 
+    //  Изменяем семисегментное значение.
+    $("#exampleArray").sevenSeg({ value: percent }); 
 }
 
 var value = 0;  //  Значение.
@@ -83,9 +91,9 @@ var value = 0;  //  Значение.
             setTimeout(wsStart, 1000);
         };
         ws.onmessage = function(evt) { 
-            if(evt.data !== undefined){
-                var value = (evt.data * 60).toFixed(1);
-                console.log(value);
+            if(evt.data !== undefined && evt.data !== null){
+                var value = (evt.data * 60).toFixed(1); // град/мин.
+                //console.log(value);
                 //console.log(value);
                 range_change_event(value);
                 setTimeout(function(){
