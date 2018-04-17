@@ -1,4 +1,5 @@
 <?php
+namespace morozovsk\websocket\examples\chat\server;
 
 $CRC_32_ = new CrcParams();
 $CRC_32_->Init = 0xFFFFFFFF;

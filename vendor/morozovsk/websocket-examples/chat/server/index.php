@@ -10,6 +10,8 @@ $config = array(
     'pid' => '/tmp/websocket_chat.pid',
     'websocket' => 'tcp://192.168.1.47:8002', //  Локальный адрес сервера.
     //'websocket' => 'tcp://10.42.0.1:8002', //  Локальный адрес сервера.
+    
+    
     //'localsocket' => 'tcp://127.0.0.1:8010',
     //'master' => 'tcp://127.0.0.1:8020',
     //'eventDriver' => 'event'

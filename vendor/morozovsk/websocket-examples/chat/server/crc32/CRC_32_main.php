@@ -1,5 +1,5 @@
 <?php
-
+namespace morozovsk\websocket\examples\chat\server;
 class CrcResult {
     public $Name = '';
     public $Crc = 0;
