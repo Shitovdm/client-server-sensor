@@ -34,31 +34,59 @@
             <path id="dividing" d="M75,300 a80,80 0 1,0 450,0" fill="#E79A16" />
             <path id="dividing-big" d="M100,300 a80,80 0 1,0 400,0" fill="#E79A16" />
             
-            <text id="division_M3_3" class="text" x="30" y="-296" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">-30</text>
-            <text id="division_M2_3" class="text" x="60" y="-420" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">-20</text>
-            <text id="division_M1_3" class="text" x="150" y="-515" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">-10</text>
+            <!-- Значение делений основной шкалы. -->
+            <text id="division_M3_3" class="text" x="20" y="-296" font-size="20" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">-30</text>
+            <text id="division_M2_3" class="text" x="50" y="-420" font-size="20" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">-20</text>
+            <text id="division_M1_3" class="text" x="140" y="-515" font-size="20" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">-10</text>
             
-            <text class="text" x="295" y="-550" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">0</text>
+            <text class="text" x="295" y="-550" font-size="20" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">0</text>
             
-            <text id="division_3_3" class="text" x="560" y="-296" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">30</text>
-            <text id="division_2_3" class="text" x="530" y="-420" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">20</text>
-            <text id="division_1_3" class="text" x="440" y="-515" font-size="16" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">10</text>
+            <text id="division_3_3" class="text" x="550" y="-296" font-size="20" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">30</text>
+            <text id="division_2_3" class="text" x="520" y="-420" font-size="20" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">20</text>
+            <text id="division_1_3" class="text" x="430" y="-515" font-size="20" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">10</text>
+            
+            <!-- Остальной текст -->
+            
             
 	    <circle id="outline_ends" class="circle outline" cx="50%" cy="50%"></circle>
 	</svg>
+        
 	<img id="meter_needle" src="svg/svg-meter-gauge-needle.svg" alt="">
         <input id="slider" type="range" min="-100" max="100" value="0" hidden=""/> 
-        <div class="segment-indicator" style="width: 250px; position: relative; top: -230px; left: 180px;">
+        <div class="segment-indicator" style="width: 250px; position: relative; top: -230px; left: 180px;" title="Числовой формат данных">
             <div id="exampleArray"></div>
         </div>
+        <!-- Left half of circle half.-->
         <div class="control-panel">
-            <b onclick="setLimit(30)">Limit - 30</b>
-            <b onclick="setLimit(45)">Limit - 45</b>
-            <b onclick="setLimit(60)">Limit - 60</b>
-            <b onclick="setLimit(120)">Limit - 120</b>
-            <b onclick="setLimit(300)">Limit - 300</b>
-            <b onclick="setLimit(600)">Limit - 600</b>
+            
+            
+            <!-- Limit trigger.-->
+            <div class="trigger-control">
+                <div class="trigger-act trigger-toUp" onclick="setLimit(1)" title="Увеличить"><img src="./img/icons/toUp.png" width="30px;"></div>
+                <div id="setLimit-value" title="Значение предела измерения">30</div>
+                <div class="trigger-act trigger-toDown" onclick="setLimit(0)" title="Уменьшить"><img src="./img/icons/toDown.png" width="30px;"></div>
+                <div class="clear"></div>
+            </div>
+            <div class="trigger-control buttons">
+                <div class="trigger-act" onclick="saveAs()" title="Сохранить"><img src="./img/icons/saveAs.png" width="30px;"></div>
+                <div class="trigger-act" onclick="settingsShow()" title="Настройки"><img src="./img/icons/settings.png" width="30px;"></div>
+                <div class="clear"></div>
+            </div>
+            
         </div>
+        
+        <!-- Text.-->
+        <div class="measured_value" title="Измеряемая величина">
+            <div class="value_title">град</div>
+            <div class="fraction"></div>
+            <div class="value_title">мин</div>
+        </div>
+        
+        <div class="rivet rever-1"></div>
+        <div class="rivet rever-2"></div>
+        <div class="rivet rever-3"></div>
+        <div class="rivet rever-4"></div>
+        
 	</div>
     <script type="text/javascript" src="js/inbuild/main.js"></script>
 </body>
