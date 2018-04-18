@@ -13,7 +13,7 @@ include_once './crc32/CRC_32_main.php';
 
 class OpenCOM
 {
-    function __construct() {
+    public function __construct() {
          echo("Port opened. \n");
          $serial = new phpSerial(); //  Экземпляр класса работы с портом.
          $serial->phpSerial();  //  Вызываем конструктор явно.
@@ -39,7 +39,6 @@ class ChatWebsocketDaemonHandler extends \morozovsk\websocket\Daemon
     protected $demon_enable = false;
     public $COM;
     
-
     /**
      * Worked converting method.
      * @param hex $number
@@ -60,7 +59,7 @@ class ChatWebsocketDaemonHandler extends \morozovsk\websocket\Daemon
     }
     
     
-    protected function readingData() {
+    public function readingData() {
         //  Выполняем до тех пор, пока не будет получены корректные данные.
         while( 1 === 1){
             $data = $this->COM->readPort(); //  Получаем верифицированный пакет.
@@ -68,23 +67,44 @@ class ChatWebsocketDaemonHandler extends \morozovsk\websocket\Daemon
                 //  Достаем нужные 4 байта.
                 $angularVelocity = round($this->hex2float($data[23] . $data[22] . $data[21] . $data[20]), 2);
                 echo($angularVelocity . "\n");
-                break;  //  Выходим из петли, т.к. данные получены успешно.
-            }else{
-                echo("Loop...");
+                $this->toClients($angularVelocity);
+                return $angularVelocity;
+            }else{  //  Повторная попытка получить данные.
+                //echo("Repeat...");
             }
         }
-        return $angularVelocity;
+        return false;
     }
     
-    
-    protected function transferDemon(){
-        echo("transfer.. \n");
-        $angle = $this->readingData();
+    public function toClients($angle){
         foreach ($this->clients as $clientId => $client) {
             $this->sendToClient($clientId, $angle);
+            if($clientId == end($this->clients)) {
+                return true;
+            }
         }
+    }
+
+        /**
+     * Функция - демон. Читает данные с порта и отправляет клиенту в рекурсивном режиме.
+     */
+    public function transferDemon(){
+        $waiting = true;
+        $done = false;
         
-        //$this->transferDemon();
+        $this->readingData();
+        //$done = $this->toClients($angle);
+        /*while ($waiting == true){
+            echo("transfering");
+            if($done == true){
+                
+                $waiting = false;
+                //$this->transferDemon();
+                return;
+            }else{
+                echo("Waiting... \n"); 
+            }
+        }*/
     }
     
     public function onOpen($connectionId, $info) {//вызывается при соединении с новым клиентом
@@ -104,6 +124,7 @@ class ChatWebsocketDaemonHandler extends \morozovsk\websocket\Daemon
             $this->sendToClient($clientId, "COM port on server opened.");
         }
         echo("Client " . $clientId . " connect!");
+        $this->transferDemon();
     }
 
     protected function onClose($connectionId) {//вызывается при закрытии соединения с существующим клиентом
@@ -121,4 +142,6 @@ class ChatWebsocketDaemonHandler extends \morozovsk\websocket\Daemon
     protected function onMasterClose($connectionId) {
         
     }
+    
+    
 }
