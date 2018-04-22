@@ -75,14 +75,25 @@ You should have Raspberry Pi 3 with installed system ubuntu-16.04.
 1. Go to local server address
 For example http://192.168.1.41
 
+### Client interface
+![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/client-r.png)  
+
+**Explanations:**
+1. Units (grad/min).  
+2. Change the measurement limit of the instrument(range: 30-300, every 15).  
+3. Digital indicator of the exact value.  
+4. Settings button.  
+5. Save all in log button.  
+6. Current measurement limit.  
 
 ***
+
 > **Resources**:
 >> **https://github.com/morozovsk/websocket** - PHP Websocket Class.  
 >> **https://github.com/Xowap/PHP-Serial** - PHP Serial Class.  
 >> **https://github.com/hongkiat/svg-meter-gauge** - Simple SVG-meter.  
 >> **https://github.com/meetanthony/crcphp** - Calculating CRC32 Class.  
 >> **https://wiki.ubuntu.com/ARM/RaspberryPi** - ubuntu-18.04-preinstalled-server-armhf+raspi3.img.xz (4G image, 295M compressed).  
-
+>> **https://howtoraspberrypi.com/create-a-wi-fi-hotspot-in-less-than-10-minutes-with-pi-raspberry/** - Hotspot on RasPi3.
 
   
