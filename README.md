@@ -12,11 +12,7 @@ This client-server application is designed to visualize data from the sensor on 
 
 ***
 
-<h3>Install OS</h3>
-1. Use Raspberry Pi 3.
-2. 
-
-
+You should have Raspberry Pi 3 with installed system ubuntu-16.04. 
 
 <h3>Server Start</h3>
 
@@ -86,5 +82,7 @@ For example http://192.168.1.41
 >> **https://github.com/Xowap/PHP-Serial** - PHP Serial Class.  
 >> **https://github.com/hongkiat/svg-meter-gauge** - Simple SVG-meter.  
 >> **https://github.com/meetanthony/crcphp** - Calculating CRC32 Class.  
+>> **https://wiki.ubuntu.com/ARM/RaspberryPi** - ubuntu-18.04-preinstalled-server-armhf+raspi3.img.xz (4G image, 295M compressed).  
+
 
   
