@@ -12,9 +12,17 @@ This client-server application is designed to visualize data from the sensor on 
 
 ***
 
+<h3>Install OS</h3>
+1. Use Raspberry Pi 3.
+2. 
+
+
+
 <h3>Server Start</h3>
 
-1. Use ubuntu-16.04.4-desktop-i386;  
+**Server installation lasts a fairly long time, about 30-40 minutes.** 
+
+1. Use ubuntu-16.04 (ubuntu-16.04-preinstalled-server-armhf+raspi3.img);
 2. Install LAMP:  
 ```sudo apt-get install lamp-server^ phpmyadmin```  
 ```sudo /etc/init.d/apache2 start```  
@@ -27,7 +35,7 @@ This client-server application is designed to visualize data from the sensor on 
 ```sudo ufw allow 21/tcp```  
 ```sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.orig```  
 ```sudo nano /etc/vsftpd.conf```  
-8. Edit ib /etc/vsftpd.conf:  
+8. Edit ftp config /etc/vsftpd.conf:  
 ```anonymous_enable = NO```  
 ```local_enable = YES```  
 ```write_enable = YES```  
@@ -69,7 +77,7 @@ This client-server application is designed to visualize data from the sensor on 
 <h3>Client</h3>
 
 1. Go to local server address
-For example http://192.168.1.47/sensor-main/vendor/morozovsk/websocket-examples/chat/client/
+For example http://192.168.1.41
 
 
 ***
