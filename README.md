@@ -47,16 +47,16 @@ You should have Raspberry Pi 3 with installed system ubuntu-16.04.
 ```userlist_file=/etc/vsftpd.userlist```  
 ```userlist_deny=NO```  
 9. Create new user:  
-```sudo useradd -m -c "Test User" -s /bin/bash testuser```  
-```sudo passwd testuser```  
-```echo "testuser" | sudo tee -a /etc/vsftpd.userlist```  
+```sudo useradd -m -c "mplab" -s /bin/bash mplab```  
+```sudo passwd mplab```  
+```echo "mplab" | sudo tee -a /etc/vsftpd.userlist```  
 ```cat /etc/vsftpd.userlist```  
 4. Restart FTP-server;  
 5. Paste all project files into /var/www/html;  
 6. Start LAMP:  
 ```sudo /etc/init.d/apache2 start```  
 7. Move to server/index.php folder and start php server:  
-```cd /var/www/html/sensor-main/vendor/morozovsk/websocket-examples/chat/server/```  
+```cd /var/www/html/sensor/vendor/morozovsk/websocket-examples/chat/server/```  
 ```php index.php start``` 
 
 <h3>Wi-Fi Access Point Setup</h3>
@@ -96,8 +96,25 @@ Edit row:
 
 2. You must enter a password to get started.  
 **Solution:**  
+```nano /etc/systemd/system/getty.target.wants/getty@tty1.service```  
+Edit row:  
+```ExecStart=-/sbin/agetty --autologin mplab --noclear %I $TERM```  
 
+3. Adding the websocket server script to startup.
+```nano /etc/rc.local```  
+Before "exit 0" add:  
+```
+cd /var/www/html/vendor/morozovsk/websocket-examples/chat/server
+php /var/www/html/vendor/morozovsk/websocket-examples/chat/server/index.php start &  
+```  
+4. Adding turn on button (https://geektimes.ru/post/255098/).  
 
+5. Fixing recursive fault but reboot is needed.
+**No solution!**
+
+6. Problem with in-build UART (http://raspberrypi.ru/blog/627.html).
+**Solution:**  
+Use external adapter CP2102 UART<->USB.
 ***
 
 > **Resources**:
