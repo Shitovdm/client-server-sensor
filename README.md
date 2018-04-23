@@ -87,8 +87,9 @@ For example http://192.168.1.41
 6. Current measurement limit.  
 
 <h3>Possible problems:</h3>
+
 1. Timeout for connection search eth0 in 5 minutes at system start.  
-**Solution:**  
+**Solution**:  
 ```nano /lib/systemd/system/networking.service```  
 Edit row:  
 ```TimeoutStartSec = 5sec```  
@@ -105,6 +106,6 @@ Edit row:
 >> **https://github.com/hongkiat/svg-meter-gauge** - Simple SVG-meter.  
 >> **https://github.com/meetanthony/crcphp** - Calculating CRC32 Class.  
 >> **https://wiki.ubuntu.com/ARM/RaspberryPi** - ubuntu-18.04-preinstalled-server-armhf+raspi3.img.xz (4G image, 295M compressed).  
->> **https://howtoraspberrypi.com/create-a-wi-fi-hotspot-in-less-than-10-minutes-with-pi-raspberry/** - Hotspot on RasPi3.
+>> **http://academicfox.com/raspberry-pi-besprovodnaya-tochka-dostupa-wifi-access-point/** - Hotspot on RasPi3.
 
   
