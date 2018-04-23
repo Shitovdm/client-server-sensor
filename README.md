@@ -86,6 +86,17 @@ For example http://192.168.1.41
 5. Save all in log button.  
 6. Current measurement limit.  
 
+<h3>Possible problems:</h3>
+1. Timeout for connection search eth0 in 5 minutes at system start.  
+**Solution:**  
+```nano /lib/systemd/system/networking.service```  
+Edit row:  
+```TimeoutStartSec = 5sec```  
+
+2. You must enter a password to get started.  
+**Solution:**  
+
+
 ***
 
 > **Resources**:
