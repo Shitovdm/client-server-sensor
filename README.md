@@ -5,12 +5,9 @@ This client-server application is designed to visualize data from the sensor on 
 ### Generalized structural scheme
 ![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/Scheme-1.PNG)
 
-***  
-
 ### Detailed structural scheme
 ![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/Scheme-2.PNG)
 
-***
 
 You should have Raspberry Pi 3 with installed system ubuntu-16.04. 
 
@@ -158,7 +155,7 @@ up iptables-restore < /etc/iptables.ipv4.nat
 1. Go to local server address.
 For example http://192.168.1.41
 
-### Client interface
+### Interface
 ![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/client-r.png)  
 
 **Explanations:**
@@ -198,12 +195,10 @@ Before "exit 0" add:
 **Solution:**  
 Use external adapter CP2102 UART<->USB.  
 
-> **Resources**:
->> **https://github.com/morozovsk/websocket** - PHP Websocket Class.  
->> **https://github.com/Xowap/PHP-Serial** - PHP Serial Class.  
->> **https://github.com/hongkiat/svg-meter-gauge** - Simple SVG-meter.  
->> **https://github.com/meetanthony/crcphp** - Calculating CRC32 Class.  
->> **https://wiki.ubuntu.com/ARM/RaspberryPi** - ubuntu-18.04-preinstalled-server-armhf+raspi3.img.xz (4G image, 295M compressed).  
->> **http://academicfox.com/raspberry-pi-besprovodnaya-tochka-dostupa-wifi-access-point/** - Hotspot on RasPi3.
-
-  
+<h3>Resources:</h3>
+> **https://github.com/morozovsk/websocket** - PHP Websocket Class.  
+> **https://github.com/Xowap/PHP-Serial** - PHP Serial Class.  
+> **https://github.com/hongkiat/svg-meter-gauge** - Simple SVG-meter.  
+> **https://github.com/meetanthony/crcphp** - Calculating CRC32 Class.  
+> **https://wiki.ubuntu.com/ARM/RaspberryPi** - ubuntu-18.04-preinstalled-server-armhf+raspi3.img.xz (4G image, 295M compressed).  
+> **http://academicfox.com/raspberry-pi-besprovodnaya-tochka-dostupa-wifi-access-point/** - Hotspot on RasPi3.
