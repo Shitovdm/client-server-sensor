@@ -152,8 +152,8 @@ up iptables-restore < /etc/iptables.ipv4.nat
 
 <h3>Client</h3>
 
-1. Go to local server address.
-For example http://192.168.1.41
+1. Connect to Connector to access point.  
+2. Go to local server address(http://192.168.1.41).  
 
 ### Interface
 ![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/client-r.png)  
@@ -170,15 +170,17 @@ For example http://192.168.1.41
 
 1. Timeout for connection search eth0 in 5 minutes at system start.  
 **Solution**:  
-```nano /lib/systemd/system/networking.service```  
-Edit row:  
-```TimeoutStartSec = 5sec```  
+```nano /lib/systemd/system/networking.service```   
+```
+TimeoutStartSec = 5sec  
+```  
 
 2. You must enter a password to get started.  
 **Solution:**  
-```nano /etc/systemd/system/getty.target.wants/getty@tty1.service```  
-Edit row:  
-```ExecStart=-/sbin/agetty --autologin mplab --noclear %I $TERM```  
+```nano /etc/systemd/system/getty.target.wants/getty@tty1.service```   
+```
+ExecStart=-/sbin/agetty --autologin mplab --noclear %I $TERM  
+```  
 
 3. Adding the websocket server script to startup.  
 ```nano /etc/rc.local```  
@@ -195,10 +197,12 @@ Before "exit 0" add:
 **Solution:**  
 Use external adapter CP2102 UART<->USB.  
 
-<h3>Resources:</h3>
-> **https://github.com/morozovsk/websocket** - PHP Websocket Class.  
-> **https://github.com/Xowap/PHP-Serial** - PHP Serial Class.  
-> **https://github.com/hongkiat/svg-meter-gauge** - Simple SVG-meter.  
-> **https://github.com/meetanthony/crcphp** - Calculating CRC32 Class.  
-> **https://wiki.ubuntu.com/ARM/RaspberryPi** - ubuntu-18.04-preinstalled-server-armhf+raspi3.img.xz (4G image, 295M compressed).  
-> **http://academicfox.com/raspberry-pi-besprovodnaya-tochka-dostupa-wifi-access-point/** - Hotspot on RasPi3.
+<h3>Resources:</h3>  
+
+>> **https://github.com/morozovsk/websocket** - PHP Websocket Class.  
+>> **https://github.com/Xowap/PHP-Serial** - PHP Serial Class.  
+>> **https://github.com/hongkiat/svg-meter-gauge** - Simple SVG-meter.  
+>> **https://github.com/meetanthony/crcphp** - Calculating CRC32 Class.  
+>> **https://wiki.ubuntu.com/ARM/RaspberryPi** - ubuntu-18.04-preinstalled-server-armhf+raspi3.img.xz (4G image, 295M compressed).  
+>> **http://academicfox.com/raspberry-pi-besprovodnaya-tochka-dostupa-wifi-access-point/** - Hotspot on RasPi3.
+
