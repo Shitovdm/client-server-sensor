@@ -59,20 +59,106 @@ You should have Raspberry Pi 3 with installed system ubuntu-16.04.
 ```cd /var/www/html/sensor/vendor/morozovsk/websocket-examples/chat/server/```  
 ```php index.php start``` 
 
-<h3>Wi-Fi Access Point Setup</h3>
+<h3>Wi-Fi Hotspot Setup</h3>
 
-1. Install libpam-radius-auth:
-```sudo apt-get install hostapd libpam-radius-auth```  
-
-> Links
->> http://linux-user.ru/distributivy-linux/programmy-dlya-linux/lokalnyj-server-lamp-dlya-ubuntu-linux-mint/
->> http://rus-linux.net/MyLDP/server/ftp.html
->> https://losst.ru/ustanovka-ftp-na-ubuntu-16-04
-
+1. Install hostapd:  
+```sudo apt-get install hostapd isc-dhcp-server```  
+2. DHCP-server settings:  
+```sudo nano /etc/dhcp/dhcpd.conf```  
+Edit:  
+```
+#option domain-name "example.org";  
+#option domain-name-servers ns1.example.org, ns2.example.org;  
+authoritative;  
+```  
+Paste:  
+```
+subnet 192.168.42.0 netmask 255.255.255.0 {  
+  range 192.168.42.10 192.168.42.50;  
+  option broadcast-address 192.168.42.255;  
+  option routers 192.168.42.1;  
+  default-lease-time 600;
+  max-lease-time 7200;  
+  option domain-name "local";  
+  option domain-name-servers 8.8.8.8, 8.8.4.4;  
+}
+```  
+3. Edit isc-dhcp-server:
+```sudo nano /etc/default/isc-dhcp-server```  
+Edit:  
+```
+INTERFACES=”wlan0″
+```  
+4. Static ip configuration:
+```sudo ifdown wlan0```  
+```sudo nano /etc/network/interfaces```  
+Edit:  
+```
+#auto wlan0
+```  
+Paste:  
+```
+allow-hotplug wlan0  
+iface wlan0 inet static  
+address 192.168.42.1  
+netmask 255.255.255.0  
+```  
+```sudo ifconfig wlan0 192.168.42.1```  
+5. WI-FI config:  
+```sudo nano /etc/hostapd/hostapd.conf```  
+Paste:  
+```
+interface=wlan0
+driver=nl80211
+ssid=PI_sensor_v1
+hw_mode=g
+channel=6
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_passphrase=mplabsensor
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+```  
+```sudo nano /etc/default/hostapd```  
+```
+DAEMON_CONF=”/etc/hostapd/hostapd.conf”  
+```  
+6. NAT settings:  
+```sudo nano /etc/sysctl.conf```  
+```
+net.ipv4.ip_forward=1  
+```
+```sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"```  
+```sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE```  
+```sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT```  
+```sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT```  
+```sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"```  
+```sudo nano /etc/network/interfaces```  
+```
+up iptables-restore < /etc/iptables.ipv4.nat  
+```  
+7. Updata hostapd(optional):  
+```wget http://adafruit-download.s3.amazonaws.com/adafruit_hostapd_14128.zip```  
+```unzip adafruit_hostapd_14128.zip```  
+```sudo mv /usr/sbin/hostapd /usr/sbin/hostapd.ORIG```  
+```sudo mv hostapd /usr/sbin```  
+```sudo chmod 755 /usr/sbin/hostapd```  
+8. To startup:  
+```sudo service hostapd start```  
+```sudo service isc-dhcp-server start```  
+```sudo update-rc.d hostapd enable```  
+```sudo update-rc.d isc-dhcp-server enable```  
+9. Other:
+```sudo /usr/sbin/hostapd /etc/hostapd/hostapd.conf``` - start hostapd.  
+```sudo service hostapd status``` - hostapd status.  
+```sudo service isc-dhcp-server status``` - isc-dhcp-server status.  
 
 <h3>Client</h3>
 
-1. Go to local server address
+1. Go to local server address.
 For example http://192.168.1.41
 
 ### Client interface
@@ -100,22 +186,20 @@ Edit row:
 Edit row:  
 ```ExecStart=-/sbin/agetty --autologin mplab --noclear %I $TERM```  
 
-3. Adding the websocket server script to startup.
+3. Adding the websocket server script to startup.  
 ```nano /etc/rc.local```  
 Before "exit 0" add:  
-```
-cd /var/www/html/vendor/morozovsk/websocket-examples/chat/server
-php /var/www/html/vendor/morozovsk/websocket-examples/chat/server/index.php start &  
-```  
+```cd /var/www/html/vendor/morozovsk/websocket-examples/chat/server```  
+```php /var/www/html/vendor/morozovsk/websocket-examples/chat/server/index.php start &```  
+
 4. Adding turn on button (https://geektimes.ru/post/255098/).  
 
-5. Fixing recursive fault but reboot is needed.
-**No solution!**
+5. Fixing recursive fault but reboot is needed.  
+**No solution!**  
 
-6. Problem with in-build UART (http://raspberrypi.ru/blog/627.html).
+6. Problem with in-build UART (http://raspberrypi.ru/blog/627.html).  
 **Solution:**  
-Use external adapter CP2102 UART<->USB.
-***
+Use external adapter CP2102 UART<->USB.  
 
 > **Resources**:
 >> **https://github.com/morozovsk/websocket** - PHP Websocket Class.  
