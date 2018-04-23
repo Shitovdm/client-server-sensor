@@ -31,31 +31,33 @@ You should have Raspberry Pi 3 with installed system ubuntu-16.04.
 ```sudo ufw allow 21/tcp```  
 ```sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.orig```  
 ```sudo nano /etc/vsftpd.conf```  
-8. Edit ftp config /etc/vsftpd.conf:  
-```anonymous_enable = NO```  
-```local_enable = YES```  
-```write_enable = YES```  
-```local_umask = 022```  
-```dirmessage_enable = YES```  
-```xferlog_enable = YES```  
-```xferlog_std_format=YES```  
-```connect_from_port_20 = YES```  
-```listen=YES```  
-```listen_ipv6=NO```  
-```pam_service_name=vsftpd```  
-```userlist_enable = YES```  
-```userlist_file=/etc/vsftpd.userlist```  
-```userlist_deny=NO```  
-9. Create new user:  
+4. Edit ftp config /etc/vsftpd.conf:  
+```
+anonymous_enable = NO  
+local_enable = YES  
+write_enable = YES  
+local_umask = 022  
+dirmessage_enable = YES  
+xferlog_enable = YES  
+xferlog_std_format=YES  
+connect_from_port_20 = YES  
+listen=YES  
+listen_ipv6=NO  
+pam_service_name=vsftpd  
+userlist_enable = YES  
+userlist_file=/etc/vsftpd.userlist  
+userlist_deny=NO  
+```  
+5. Create new user:  
 ```sudo useradd -m -c "mplab" -s /bin/bash mplab```  
 ```sudo passwd mplab```  
 ```echo "mplab" | sudo tee -a /etc/vsftpd.userlist```  
 ```cat /etc/vsftpd.userlist```  
-4. Restart FTP-server;  
-5. Paste all project files into /var/www/html;  
-6. Start LAMP:  
+6. Restart FTP-server;  
+7. Paste all project files from ./app into /var/www/html;  
+8. Start LAMP:  
 ```sudo /etc/init.d/apache2 start```  
-7. Move to server/index.php folder and start php server:  
+9. Move to server/index.php folder and start php server:  
 ```cd /var/www/html/sensor/vendor/morozovsk/websocket-examples/chat/server/```  
 ```php index.php start``` 
 
@@ -65,14 +67,10 @@ You should have Raspberry Pi 3 with installed system ubuntu-16.04.
 ```sudo apt-get install hostapd isc-dhcp-server```  
 2. DHCP-server settings:  
 ```sudo nano /etc/dhcp/dhcpd.conf```  
-Edit:  
 ```
 #option domain-name "example.org";  
 #option domain-name-servers ns1.example.org, ns2.example.org;  
 authoritative;  
-```  
-Paste:  
-```
 subnet 192.168.42.0 netmask 255.255.255.0 {  
   range 192.168.42.10 192.168.42.50;  
   option broadcast-address 192.168.42.255;  
@@ -85,28 +83,23 @@ subnet 192.168.42.0 netmask 255.255.255.0 {
 ```  
 3. Edit isc-dhcp-server:
 ```sudo nano /etc/default/isc-dhcp-server```  
-Edit:  
 ```
 INTERFACES=”wlan0″
 ```  
 4. Static ip configuration:
 ```sudo ifdown wlan0```  
 ```sudo nano /etc/network/interfaces```  
-Edit:  
 ```
 #auto wlan0
-```  
-Paste:  
-```
 allow-hotplug wlan0  
 iface wlan0 inet static  
 address 192.168.42.1  
 netmask 255.255.255.0  
 ```  
 ```sudo ifconfig wlan0 192.168.42.1```  
+
 5. WI-FI config:  
-```sudo nano /etc/hostapd/hostapd.conf```  
-Paste:  
+```sudo nano /etc/hostapd/hostapd.conf```   
 ```
 interface=wlan0
 driver=nl80211
@@ -126,6 +119,7 @@ rsn_pairwise=CCMP
 ```
 DAEMON_CONF=”/etc/hostapd/hostapd.conf”  
 ```  
+
 6. NAT settings:  
 ```sudo nano /etc/sysctl.conf```  
 ```
@@ -140,17 +134,20 @@ net.ipv4.ip_forward=1
 ```
 up iptables-restore < /etc/iptables.ipv4.nat  
 ```  
+
 7. Updata hostapd(optional):  
 ```wget http://adafruit-download.s3.amazonaws.com/adafruit_hostapd_14128.zip```  
 ```unzip adafruit_hostapd_14128.zip```  
 ```sudo mv /usr/sbin/hostapd /usr/sbin/hostapd.ORIG```  
 ```sudo mv hostapd /usr/sbin```  
 ```sudo chmod 755 /usr/sbin/hostapd```  
+
 8. To startup:  
 ```sudo service hostapd start```  
 ```sudo service isc-dhcp-server start```  
 ```sudo update-rc.d hostapd enable```  
 ```sudo update-rc.d isc-dhcp-server enable```  
+
 9. Other:
 ```sudo /usr/sbin/hostapd /etc/hostapd/hostapd.conf``` - start hostapd.  
 ```sudo service hostapd status``` - hostapd status.  
