@@ -185,10 +185,17 @@ ExecStart=-/sbin/agetty --autologin mplab --noclear %I $TERM
 3. Adding the websocket server script to startup.  
 ```nano /etc/rc.local```  
 Before "exit 0" add:  
-```cd /var/www/html/vendor/morozovsk/websocket-examples/chat/server```  
-```php /var/www/html/vendor/morozovsk/websocket-examples/chat/server/index.php start &```  
+```
+cd /var/www/html/vendor/morozovsk/websocket-examples/chat/server  
+php /var/www/html/vendor/morozovsk/websocket-examples/chat/server/index.php start &  
+```  
 
 4. Adding turn on button (https://geektimes.ru/post/255098/).  
+```nano /etc/rc.local```  
+Before "exit 0" add:  
+```
+sudo bash /home/mplab/sys/shutdown.sh 
+```  
 
 5. Fixing recursive fault but reboot is needed.  
 **No solution!**  
