@@ -213,3 +213,18 @@ Use external adapter CP2102 UART<->USB.
 >> **https://wiki.ubuntu.com/ARM/RaspberryPi** - ubuntu-18.04-preinstalled-server-armhf+raspi3.img.xz (4G image, 295M compressed).  
 >> **http://academicfox.com/raspberry-pi-besprovodnaya-tochka-dostupa-wifi-access-point/** - Hotspot on RasPi3.
 
+
+
+Connection to UDP socket:
+***
+$socket = stream_socket_server("udp://127.0.0.1:1234", $errno, $errstr, STREAM_SERVER_BIND);
+if (!$socket) {
+    die("$errstr ($errno)");
+}
+
+do {
+    $pkt = stream_socket_recvfrom($socket, 1, 0, $peer);
+    echo $pkt."\n";
+    //stream_socket_sendto($socket, date("D M j H:i:s Y\r\n"), 0, $peer);
+} while ($pkt !== false);
+***  
