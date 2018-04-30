@@ -155,6 +155,13 @@ up iptables-restore < /etc/iptables.ipv4.nat
 1. Connect to Connector to access point.  
 2. Go to local server address(http://192.168.1.41).  
 
+
+<h3>Set up auto-update</h3>  
+1. Change permissions on all files and folders:  
+```
+sudo chmod -R 777 var/www/html
+```
+
 ### Interface
 ![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/client-r.png)  
 
