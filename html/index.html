@@ -4,15 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Course meter</title>
+    <!-- CSS.-->
+    <link rel="stylesheet" href="client/css/style.css">
+    <link rel="stylesheet" type="text/css" href="client/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="client/css/rangeslider.css">
+    <link rel="stylesheet" type="text/css" href="client/css/iphone-style-checkboxes.css">
+    <!-- JS.-->
+    <script type="text/javascript" src="client/js/native/jquery.min.js"></script>
+    <script type="text/javascript" src="client/js/native/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="client/js/native/bootstrap.min.js"></script>
+    <script type="text/javascript" src="client/js/native/knockout-2.2.1.js"></script>
+    <script type="text/javascript" src="client/js/inbuild/seven-segments.js"></script>
+    <script type="text/javascript" src="client/js/native/iphone-style-checkboxes.js"></script>
     
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    
-    <script type="text/javascript" src="js/native/jquery.min.js"></script>
-    <script type="text/javascript" src="js/native/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/native/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/native/knockout-2.2.1.js"></script>
-    <script type="text/javascript" src="js/inbuild/seven-segments.js"></script>
     
     
     
@@ -51,7 +55,7 @@
 	    <circle id="outline_ends" class="circle outline" cx="50%" cy="50%"></circle>
 	</svg>
         
-	<img id="meter_needle" src="svg/svg-meter-gauge-needle.svg" alt="">
+	<img id="meter_needle" src="client/svg/svg-meter-gauge-needle.svg" alt="">
         <input id="slider" type="range" min="-100" max="100" value="0" hidden=""/> 
         <div class="segment-indicator" style="width: 250px; position: relative; top: -230px; left: 180px;" title="Числовой формат данных">
             <div id="exampleArray"></div>
@@ -62,14 +66,14 @@
             
             <!-- Limit trigger.-->
             <div class="trigger-control">
-                <div class="trigger-act trigger-toUp" onclick="setLimit(1)" title="Увеличить"><img src="./img/icons/toUp.png" width="30px;"></div>
+                <div class="trigger-act trigger-toUp" onclick="setLimit(1)" title="Увеличить"><img src="client/img/icons/toUp.png" width="30px;"></div>
                 <div id="setLimit-value" title="Значение предела измерения">30</div>
-                <div class="trigger-act trigger-toDown" onclick="setLimit(0)" title="Уменьшить"><img src="./img/icons/toDown.png" width="30px;"></div>
+                <div class="trigger-act trigger-toDown" onclick="setLimit(0)" title="Уменьшить"><img src="client/img/icons/toDown.png" width="30px;"></div>
                 <div class="clear"></div>
             </div>
             <div class="trigger-control buttons">
-                <div class="trigger-act" onclick="saveAs()" title="Сохранить"><img src="./img/icons/saveAs.png" width="30px;"></div>
-                <div class="trigger-act" onclick="settingsShow()" title="Настройки"><img src="./img/icons/settings.png" width="30px;"></div>
+                <div class="trigger-act" onclick="saveAs()" title="Сохранить"><img src="client/img/icons/saveAs.png" width="30px;"></div>
+                <div class="trigger-act" id="show-settings" title="Настройки"><img src="client/img/icons/settings.png" width="30px;"></div>
                 <div class="clear"></div>
             </div>
             
@@ -87,8 +91,75 @@
         <div class="rivet rever-3"></div>
         <div class="rivet rever-4"></div>
         
-	</div>
-    <script type="text/javascript" src="js/inbuild/main.js"></script>
+    </div>
+    
+    
+    <!-- Settings window.-->
+    <div class="settings" id="settings">
+        <div class="settings-param">
+            <div class="settings-param-title">Чувствительность стрелки:</div>
+            <div class="settings-param-value">
+                <input type="range" min="1" max="100" value="50" class="range-slider" id="sensitivity-arrows">
+            </div>
+        </div>
+        <div class="settings-param" style="top:80px;">
+            <div class="settings-param-title">Корректировка уровня помех:</div>
+            <div class="settings-param-value">
+                <input type="range" min="1" max="100" value="20" class="range-slider" id="interference-correction">
+            </div>
+        </div>
+        <div class="settings-param" style="top:160px;">
+            <div class="settings-param-title">Фильтрация цифровых значений:</div>
+            <div class="settings-param-value">
+                <input type="range" min="1" max="100" value="0" class="range-slider" id="filtering-digital">
+            </div>
+        </div>
+        <div class="settings-param" style="top:240px;">
+            <div class="settings-param-title">Частота выдачи данных:</div>
+            <div class="settings-param-value">
+                <input type="range" min="1" max="100" value="100" class="range-slider" id="data_frequency">
+            </div>
+        </div>
+        <div class="settings-param" style="top:320px; padding: 20px 0px;">
+            <div class="settings-param-title">Темное оформление:</div>
+            <div class="settings-param-value">
+                <input type="checkbox" id="dark-theme" />
+            </div>
+        </div>
+        <div class="settings-param" style="top:390px; padding: 20px 0px;">
+            <div class="settings-param-title">Оповещать об ошибках:</div>
+            <div class="settings-param-value">
+                <input type="checkbox" id="dark-theme" />
+            </div>
+        </div>
+        
+        <div class="settings-param" style="top:460px; padding: 17px 0px; border-bottom: none;">
+            <div class="settings-param-title" style="margin-top: 10px;">Проверить наличие обновлений:</div>
+            <div class="settings-param-value">
+                <div class="update-button">
+                    <div class="update-label">ОБНОВИТЬ</div>
+                    <div class="update-img"><img src="client/img/icons/update-cloud-white.png" width="30px;"></div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Settings control buttons.-->
+        <div class="settings-control">
+            <div class="settings-control-action" id="default-button">СБРОСИТЬ</div>
+            <div class="settings-control-action" id="save-button">СОХРАНИТЬ</div>
+            <div class="settings-control-action" id="exit-button">ВЫХОД</div>
+        </div>
+    </div>
+    
+    <!-- Main actions script.-->
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            $(':checkbox').iphoneStyle();
+        });
+        $('input[type="range"]').on("change",function(){console.log(this.value);});   
+    </script>
+    
+    <script type="text/javascript" src="client/js/inbuild/main.js"></script>
 </body>
 
 </html>
