@@ -16,7 +16,7 @@ abstract class GenericSelect
     protected $_read = array();//read buffers
     protected $_write = array();//write buffers
     public $timer = null;
-
+    
     public function start() {
         $this->onStart();
 
@@ -142,6 +142,12 @@ abstract class GenericSelect
 
     protected function _write($connectionId, $data, $delimiter = '') {
         @$this->_write[$connectionId] .=  $data . $delimiter;
+        
+        //  Этот код выполняется когда передача завершается.
+        //echo("write GENERIC \n");
+        //$COM = $this->COM;
+        //$this->transferDemon();
+        //morozovsk\websocket\examples\chat\server\ChatWebsocketDaemonHandler::transferDemon();
     }
 
     protected function _sendBuffer($connect) {

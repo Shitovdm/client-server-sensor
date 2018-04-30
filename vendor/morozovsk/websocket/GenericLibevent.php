@@ -137,7 +137,7 @@ abstract class GenericLibevent
     }
 
     private function onWrite($buffer, $connectionId) {
-
+        echo("onWrite \n");
     }
 
     private function onError($buffer, $error, $connectionId) {

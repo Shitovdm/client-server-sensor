@@ -34,7 +34,15 @@ function setLimit(act){
 
 //  Диапазоны измерения.
 
+$("#exit-button").click(function() {
+  //$("#settings").fadeOut("fast", function() {});
+  $("#settings").css("display","none");
+});
 
+$("#show-settings").click(function() {
+  //$("#settings").fadeIn("fast", function() {});
+  $("#settings").css("display","block");
+});
 
 
 
@@ -88,7 +96,7 @@ function range_change_event(value) {
     }
     //  Поворачиваем стрелку.
     meter_needle.style.transform = 'rotate(' + angle + 'deg)';
-    console.log(value);
+    //console.log(value);
     //  Изменяем семисегментное значение.
     $("#exampleArray").sevenSeg({ value: angle.toFixed(1) }); 
 }
@@ -101,7 +109,8 @@ var value = 0;  //  Значение.
     $("#exampleArray").sevenSeg({ value: "----" }); 
     function wsStart() {
         //ws = new WebSocket("ws://10.42.0.1:8002/");
-        ws = new WebSocket("ws://192.168.1.47:8002/");
+        //ws = new WebSocket("ws://192.168.1.41:8002/");
+        ws = new WebSocket("ws://192.168.42.1:8002/");
         ws.onopen = function() { 
             console.log("Соединение успешно открыто.");
             console.log("Начало передачи данных.");
@@ -113,7 +122,7 @@ var value = 0;  //  Значение.
             setTimeout(wsStart, 1000);
         };
         ws.onmessage = function(evt) { 
-           console.log(evt.data );
+           //console.log(evt.data );
             if(evt.data !== undefined && evt.data !== null && evt.data !== "COM-порт на сервере успешно открыт."){
                 var value = (evt.data * 60).toFixed(1); // град/мин.
                 range_change_event(value);

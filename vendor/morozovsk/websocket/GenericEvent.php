@@ -99,7 +99,7 @@ abstract class GenericEvent
     }
 
     public function onWrite($buffer, $connectionId) {
-
+        
     }
 
     public function onError($buffer, $error, $connectionId) {

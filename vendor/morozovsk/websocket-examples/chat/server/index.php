@@ -3,12 +3,14 @@
 
 if (empty($argv[1]) || !in_array($argv[1], array('start', 'stop', 'restart'))) {
     die("не указан параметр (start|stop|restart)\r\n");
+}else{
+	echo("Launching websocket server... \n");
 }
 
 $config = array(
     'class' => 'morozovsk\websocket\examples\chat\server\ChatWebsocketDaemonHandler',
     'pid' => '/tmp/websocket_chat.pid',
-    'websocket' => 'tcp://192.168.1.47:8002', //  Локальный адрес сервера.
+    'websocket' => 'tcp://192.168.42.1:8002', //  Локальный адрес сервера.
     //'websocket' => 'tcp://10.42.0.1:8002', //  Локальный адрес сервера.
     
     

@@ -1,0 +1,51 @@
+.slidecontainer {
+    width: 80%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.range-slider {
+    -webkit-appearance: none!important;  /* Override default CSS styles */
+    appearance: none!important;
+    width: 80%!important; /* Full-width */
+    height: 25px!important; /* Specified height */
+    background: inherit!important;
+    outline: none!important; /* Remove outline */
+    -webkit-transition: .2s!important; /* 0.2 seconds transition on hover */
+    transition: opacity .2s!important;
+}
+
+/* Mouse-over effects */
+
+.range-slider::-webkit-slider-runnable-track{
+    -webkit-appearance: none!important;
+    background: #d3d3d3!important;
+}
+
+.range-slider::-webkit-slider-runnable-track:hover{
+    -webkit-appearance: none!important;
+    background: #d3d3d3!important;
+}
+
+    
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+.range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none!important; /* Override default look */
+    appearance: none!important;
+    margin-top: none!important;
+    width: 25px!important; /* Set a specific slider handle width */
+    height: 25px!important; /* Slider handle height */
+    background: #6bbf6e!important; /* Green background */
+    cursor: pointer!important; /* Cursor on hover */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5)!important;
+    transition-duration: 0.4s;
+}
+.range-slider::-webkit-slider-thumb:hover {
+    background: #4caf50!important; /* Green background */
+}
+
+.range-slider::-moz-range-thumb {
+    width: 25px!important; /* Set a specific slider handle width */
+    height: 25px!important; /* Slider handle height */
+    background: #ccc!important; /* Green background */
+    cursor: pointer!important; /* Cursor on hover */
+}

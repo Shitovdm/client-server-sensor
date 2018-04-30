@@ -185,10 +185,10 @@ border: 1px solid #808080;}
     user-select:none;
     transform-origin: bottom center;
     transform: rotate(0deg);
-    -webkit-transition-duration: 0.6s;
-    -moz-transition-duration: 0.6s;
-    -o-transition-duration: 0.6s;
-    transition-duration: 0.6s;
+    -webkit-transition-duration: 0.1s;
+    -moz-transition-duration: 0.1s;
+    -o-transition-duration: 0.1s;
+    transition-duration: 0.1s;
 }
 
 input[type=range] {
@@ -273,4 +273,109 @@ input[type=range]:focus::-ms-fill-lower {
 
 input[type=range]:focus::-ms-fill-upper {
     background: #F6F6F6;
+}
+
+
+
+.settings{
+    z-index: 10;
+    position: relative;
+    top: -601px;
+    width: 600px;
+    height: 600px;
+    background-color: #efefef;
+    margin: 0 auto;
+    border: 1px solid #808080;
+    border-radius: 10px;
+}
+.settings-param{
+    margin: 0 auto;
+    float: left;
+    width:100%;
+    border-bottom:1px solid #808080;
+    padding: 25px 0px;
+    position: absolute;
+}
+.settings-param-small{
+    padding: 20px 0px;
+}
+.settings-param-value{
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+.settings-param-title{
+    width: calc(50% - 20px);
+    float: left;
+    text-align: left;
+    margin-left: 20px;
+    font-size: 18px;
+    margin-top: 3px;
+}
+.settings-control{
+    margin: 0 auto;
+    float: left;
+    width:100%;
+    border-top:1px solid #808080;
+    position: absolute;
+    bottom: 0px;
+}
+.settings-control-action{
+    float: left;
+    border: 1px solid #888;
+    width:120px;
+    background-color: #ccc;
+    text-align: center;
+    padding: 10px 15px;
+    margin: 10px 24px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    color:#f9f9f9;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+.settings-control-action:hover{
+    background-color: #888!important;
+}
+
+#default-button{
+    background-color: #ccc;
+}
+#save-button{
+    background-color: #6bbf6e;
+}
+#exit-button{
+    background-color: #E04644;
+}
+.clear{
+    clear: both;
+    float: none!important;
+    padding: 0px!important;
+}
+
+.update-button{
+    width: 50%;
+    margin-left: 25%;
+    padding-left: 10px;
+    border: 1px solid #ccc;
+    background-color: #6bbf6e;
+    text-align: center;
+    color: #f9f9f9;
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+.update-button:hover{
+    background-color: #4CAF50;
+}
+.update-button div{
+    float: left;
+    padding: 10px 5px;
+}
+.update-img{
+    padding: 5px 0px!important;
+}
+.update-label{
+    margin-right: 10px;
 }
