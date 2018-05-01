@@ -1,5 +1,8 @@
 <?php
-/**
+
+/**     @author Shitov Dmitry
+ *      Скрипт производит поэтапный вызов bash скриптов для обновления системы.
+ * 
  * 
  */
 
@@ -16,34 +19,43 @@ if($act === "checkConnection"){
     }else{ 
         //  Соединение есть.
         //echo 'true';
-        $Text = "Синхронизация с сервером...";
+        $Text = "Загрузка необходимых компонентов...";
         //$NextAction = "Проверка наличия обновлений...";
         $NextAction = "syncRepo";
+        sleep(1);
     }
 }
 
-//  Проверка наличия обновлений.
+// Установка прав на исполнение bash скриптов.
+/*if($act === "setPermissions"){
+    exec("/etc/apache2/exec.sh");
+    //exec("sudo ./permission.sh");
+    
+    sleep(2);
+    $Text = $resp . "\n Синхронизация с сервером...";
+    $NextAction = 0;
+    //$NextAction = "syncRepo";
+}*/
 
 //  Скачивание последних обновлений.
 if($act === "syncRepo"){
     //$Text = shell_exec('sudo ./update.sh');
     //$Text = shell_exec("/var/www/html/service/update.sh 2>&1");
-    exec("/var/www/html/service/copy_repo.sh");
-    $Text = "Установка обновлений...";
+    $res = exec("/var/www/html/service/copy_repo.sh");
+    $Text = $res . " Установка обновлений...";
     $NextAction = "moveFiles";
+    sleep(1);
 }
 
 //  Позиционирование файлов по нужным папкам.
 if($act === "moveFiles"){
     //$Text = shell_exec('sudo ./update.sh');
     //$Text = shell_exec("/var/www/html/service/update.sh 2>&1");
-    exec("/var/www/html/service/move_files.sh");
-    $Text = "Установка обновлений окончена!";
+    $res = exec("/var/www/html/service/ret/service/bash/move_files.sh");
+    $Text = $res . " Установка обновлений окончена!";
     $NextAction = 0;
+    sleep(1);
 }
-
-
-//$Text = "Синхронизация с сервером...";
 
 $response = array(
     "text" => $Text,
