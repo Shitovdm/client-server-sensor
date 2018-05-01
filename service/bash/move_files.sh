@@ -12,3 +12,5 @@ cp  ../../serial/gkv_udp_send ../../../../
 #
 #   Move update file.
 cp  ../php/update.php ../../../
+#   Move update file.
+cp  copy_repo.sh ../../../
