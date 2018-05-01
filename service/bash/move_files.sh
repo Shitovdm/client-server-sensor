@@ -1,8 +1,14 @@
 #/bin/bash
 #
 #   Move client folder.
-cp -r html/client ../
-#   Move vendor folder.
-cp -r html/vendor ../
-#   Move index.html.
-cp html/index.html ../
+cp -r ../../html/client ../../../../
+#   Move server folder.
+cp -r ../../html/vendor ../../../../
+#   Move index file.
+cp  ../../html/index.html ../../../../
+#   Move serial file.
+cp  ../../serial/gkv_udp_send ../../../../
+#
+#
+#   Move update file.
+cp  ../php/update.php ../../../
