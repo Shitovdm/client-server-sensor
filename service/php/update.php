@@ -38,7 +38,7 @@ if($act === "moveFiles"){
     //$Text = shell_exec('sudo ./update.sh');
     //$Text = shell_exec("/var/www/html/service/update.sh 2>&1");
     exec("/var/www/html/service/move_files.sh");
-    $Text = "Завершение установки...";
+    $Text = "Установка обновлений окончена!";
     $NextAction = 0;
 }
 
