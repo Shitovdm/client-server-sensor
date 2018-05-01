@@ -1,8 +1,8 @@
-
 /* set radius for all circles */
 var r = 200;
 var limit = 30;     //  +-30 град/мин.
 
+//  Диапазоны измерения.
 function setLimit(act){
     if(limit === 300 && act === 1){
     }else{
@@ -32,18 +32,76 @@ function setLimit(act){
     console.log("Set new limit: ",limit);
 }
 
-//  Диапазоны измерения.
+
+
+$(document).ready(function() {
+    $(':checkbox').iphoneStyle();
+});
+$('input[type="range"]').on("change",function(){console.log(this.value);}); 
+
 
 $("#exit-button").click(function() {
-  //$("#settings").fadeOut("fast", function() {});
-  $("#settings").css("display","none");
+  $("#settings").fadeOut("fast", function() {});
+  //$("#settings").css("display","none");
 });
 
 $("#show-settings").click(function() {
-  //$("#settings").fadeIn("fast", function() {});
-  $("#settings").css("display","block");
+  $("#settings").fadeIn("fast", function() {});
+  //$("#settings").css("display","block");
 });
 
+$("#confirm-no").click(function() {
+    $(".update-window").css("display","none"); 
+    $(".background-curtain").css("display","none");
+});
+
+$("#confirm-yes").click(function() {
+    $(".confirm-update").css("display","none"); 
+    $(".uptade-preloader").css("display","block");
+    $("#update-status").html("Выполняется проверка соединения с интернетом...");
+    //  Ajax запрос к серверу для скачивания обновлений.
+    ajaxRequert("checkConnection");
+});
+
+$("#confirm-ok").click(function() {
+    $(".update-window").css("display","none"); 
+    $(".background-curtain").css("display","none");
+    $(".update-final").css("display","none");  //  Скрываем кнопку "ОК";
+});
+
+/**
+ * Рекурсивное выполнение запросов к серверному скрипту. Один запрос, одно действие.
+ * @param {type} action
+ * @returns {undefined}
+ */
+function ajaxRequert(action){
+    $.ajax({
+        url: 'service/update.php', 
+        type:'POST',
+        dataType: 'json',
+        data: {act : action},
+        success: function(response){
+            console.log(response);
+            $("#update-status").html(response.text);
+            if(response.nextAction !== 0){
+                $(".uptade-preloader").css("display","block");  //  Показываем прелоадер.
+                $(".update-final").css("display","none");  //  Скрываем кнопку "ОК";
+                ajaxRequert(response.nextAction);
+            }else{
+                console.log("Конец выполнения запросов.");
+                $(".update-final").css("display","block");  //  Показываем кнопку "ОК";
+                $(".uptade-preloader").css("display","none");  //  Скрываем прелоадер.
+            }
+        }
+    });
+}
+
+function cloudUpdateConfirmation(){
+    $(".update-window").css("display","block");
+    $(".background-curtain").css("display","block");
+    $("#update-status").html("Вы действительно хотите начать установку обновлений?");
+    $(".confirm-update").css("display","block");
+}
 
 
 var circles = document.querySelectorAll('.circle');

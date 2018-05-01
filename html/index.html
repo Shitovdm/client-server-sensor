@@ -132,7 +132,7 @@
         <div class="settings-param" style="top:460px; padding: 17px 0px; border-bottom: none;">
             <div class="settings-param-title" style="margin-top: 10px;">Проверить наличие обновлений:</div>
             <div class="settings-param-value">
-                <div class="update-button">
+                <div class="update-button" onClick="cloudUpdateConfirmation()">
                     <div class="update-label">ОБНОВИТЬ</div>
                     <div class="update-img"><img src="client/img/icons/update-cloud-white.png" width="30px;"></div>
                     <div class="clear"></div>
@@ -147,14 +147,19 @@
         </div>
     </div>
     
-    <!-- Main actions script.-->
-    <script type="text/javascript" charset="utf-8">
-        $(document).ready(function() {
-            $(':checkbox').iphoneStyle();
-        });
-        $('input[type="range"]').on("change",function(){console.log(this.value);});   
-    </script>
+    <div class="background-curtain">.</div>
+    <div class="update-window">
+        <div class="uptade-preloader"><img src="client/img/preloaders/glass-spheres.gif"></div>
+        <div class="update-status" id="update-status">...</div>
+        <div class="confirm-update">
+            <div class="confirm-variant" id="confirm-no">Нет</div>
+            <div class="confirm-variant" id="confirm-yes">Да</div>
+            <div class="clear"></div>
+        </div>
+        <div class="update-final" id="confirm-ok">Ок</div>
+    </div>
     
+    <!-- Main actions script.-->
     <script type="text/javascript" src="client/js/inbuild/main.js"></script>
 </body>
 
