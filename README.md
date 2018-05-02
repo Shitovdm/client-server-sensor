@@ -235,3 +235,4 @@ do {
     //stream_socket_sendto($socket, date("D M j H:i:s Y\r\n"), 0, $peer);
 } while ($pkt !== false);
 ***  
+Test use
