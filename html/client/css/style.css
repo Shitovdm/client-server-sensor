@@ -1,8 +1,6 @@
 body{
     background-color: #f9f9f9!important;
-}
-.glty{
-    color: #444;
+    overflow-y: hidden;
 }
 #wrapper {
     position: relative; 

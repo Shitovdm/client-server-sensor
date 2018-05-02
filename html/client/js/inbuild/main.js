@@ -37,7 +37,31 @@ function setLimit(act){
 $(document).ready(function() {
     $(':checkbox').iphoneStyle();
 });
-$('input[type="range"]').on("change",function(){console.log(this.value);}); 
+$('#sensitivity-arrows').on("change",function(){
+    console.log(this.value);
+}); 
+
+$('#default-button').on("click",function(){
+    console.log("Все параметры выставлены по умолчанию.");
+    $("#sensitivity-arrows").val(50);
+    $("#interference-correction").val(20);
+    $("#filtering-digital").val(50);
+    $("#data_frequency").val(100);
+    
+}); 
+
+$("#dark-theme").change(function() {
+     if(this.checked) {
+         console.log("213");
+     }
+ });
+
+$("#dark-theme").parent("div").on("click",function() {
+    console.log("we");
+    if($("#dark-theme").checked) {
+        console.log("ok");
+    }
+});
 
 
 $("#exit-button").click(function() {
@@ -76,7 +100,7 @@ $("#confirm-ok").click(function() {
  */
 function ajaxRequert(action){
     $.ajax({
-        url: 'service/update.php', 
+        url: 'upgrade/update.php', 
         type:'POST',
         dataType: 'json',
         data: {act : action},
@@ -86,7 +110,7 @@ function ajaxRequert(action){
             if(response.nextAction !== 0){
                 $(".uptade-preloader").css("display","block");  //  Показываем прелоадер.
                 $(".update-final").css("display","none");  //  Скрываем кнопку "ОК";
-                ajaxRequert(response.nextAction);
+                //ajaxRequert(response.nextAction);
             }else{
                 console.log("Конец выполнения запросов.");
                 $(".update-final").css("display","block");  //  Показываем кнопку "ОК";
