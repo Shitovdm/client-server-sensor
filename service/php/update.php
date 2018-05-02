@@ -19,7 +19,7 @@ if($act === "checkConnection"){
     }else{ 
         //  Соединение есть.
         //  Переходим к загрузке обновлений.
-        $Text = "Обновления успешно установлены.";
+        $Text = "Загрузка обновлений...";
         $NextAction = "cloneRepo";
         sleep(2);
     }
@@ -32,7 +32,7 @@ if($act === "cloneRepo"){
     exec("git pull origin master");
     $Text = "Изменение прав доступа к файлам и папкам...";
     $NextAction = "setPermission";
-    sleep(5);
+    sleep(3);
 }
 
 if($act === "setPermission"){
