@@ -110,7 +110,7 @@ function ajaxRequert(action){
             if(response.nextAction !== 0){
                 $(".uptade-preloader").css("display","block");  //  Показываем прелоадер.
                 $(".update-final").css("display","none");  //  Скрываем кнопку "ОК";
-                //ajaxRequert(response.nextAction);
+                ajaxRequert(response.nextAction);
             }else{
                 console.log("Конец выполнения запросов.");
                 $(".update-final").css("display","block");  //  Показываем кнопку "ОК";
