@@ -18,11 +18,31 @@ if($act === "checkConnection"){
         $NextAction = 0;
     }else{ 
         //  Соединение есть.
-        //echo 'true';
-        $Text = "Загрузка необходимых компонентов...";
-        //$NextAction = "Проверка наличия обновлений...";
-        $NextAction = "syncRepo";
-        sleep(1);
+        //  Переходим к загрузке обновлений.
+
+        //  Это работает, pull с перезаписью.
+        exec("git fetch --all");
+        exec("git reset --hard origin/master");
+        exec("git pull origin master");
+        
+        //  Изменение прав доступа к файлу в директории upgrade.
+        //exec("chmod +x README.md");
+        //  Изменение прав доступа всего каталога upgrade.
+        exec("chmod -R 777 .");
+        
+        //  Копирование файлов из каталога upgrade в корневой каталог сервера.(/var/www/html/)
+        exec("cp html/index.html ../");
+        exec("cp -r html/client ../");
+        exec("cp -r html/vendor ../");
+        
+        exec("cp serial/gkv_udp_send ../");
+        
+        exec("cp service/php/update.php ./");
+        
+        
+        $Text = "Обновления успешно установлены.";
+        $NextAction = 0;
+        sleep(5);
     }
 }
 
@@ -38,7 +58,7 @@ if($act === "checkConnection"){
 }*/
 
 //  Скачивание последних обновлений.
-if($act === "syncRepo"){
+/*if($act === "syncRepo"){
     //$Text = shell_exec('sudo ./update.sh');
     //$Text = shell_exec("/var/www/html/service/update.sh 2>&1");
     $res = exec("/var/www/html/service/copy_repo.sh");
@@ -55,7 +75,7 @@ if($act === "moveFiles"){
     $Text = $res . " Установка обновлений окончена!";
     $NextAction = 0;
     sleep(1);
-}
+}*/
 
 $response = array(
     "text" => $Text,
