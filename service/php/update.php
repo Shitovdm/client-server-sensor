@@ -2,8 +2,8 @@
 
 /**     @author Shitov Dmitry
  *      Скрипт производит поэтапный вызов bash скриптов для обновления системы.
- * 
- * 
+ *      Необходимо максимально аккуратно изменять содержимое файла.
+ *      Любые ошибки в этом файле приведут к краху не только системы обновлений но и у неработоспособности всей системы.
  */
 
 $act = $_POST["act"];
@@ -19,63 +19,46 @@ if($act === "checkConnection"){
     }else{ 
         //  Соединение есть.
         //  Переходим к загрузке обновлений.
-
-        //  Это работает, pull с перезаписью.
-        exec("git fetch --all");
-        exec("git reset --hard origin/master");
-        exec("git pull origin master");
-        
-        //  Изменение прав доступа к файлу в директории upgrade.
-        //exec("chmod +x README.md");
-        //  Изменение прав доступа всего каталога upgrade.
-        exec("chmod -R 777 .");
-        
-        //  Копирование файлов из каталога upgrade в корневой каталог сервера.(/var/www/html/)
-        exec("cp html/index.html ../");
-        exec("cp -r html/client ../");
-        exec("cp -r html/vendor ../");
-        
-        exec("cp serial/gkv_udp_send ../");
-        
-        exec("cp service/php/update.php ./");
-        
-        
         $Text = "Обновления успешно установлены.";
-        $NextAction = 0;
-        sleep(5);
+        $NextAction = "cloneRepo";
+        sleep(2);
     }
 }
 
-// Установка прав на исполнение bash скриптов.
-/*if($act === "setPermissions"){
-    exec("/etc/apache2/exec.sh");
-    //exec("sudo ./permission.sh");
-    
-    sleep(2);
-    $Text = $resp . "\n Синхронизация с сервером...";
-    $NextAction = 0;
-    //$NextAction = "syncRepo";
-}*/
+if($act === "cloneRepo"){
+    //  Это работает, pull с перезаписью.
+    exec("git fetch --all");
+    exec("git reset --hard origin/master");
+    exec("git pull origin master");
+    $Text = "Изменение прав доступа к файлам и папкам...";
+    $NextAction = "setPermission";
+    sleep(5);
+}
 
-//  Скачивание последних обновлений.
-/*if($act === "syncRepo"){
-    //$Text = shell_exec('sudo ./update.sh');
-    //$Text = shell_exec("/var/www/html/service/update.sh 2>&1");
-    $res = exec("/var/www/html/service/copy_repo.sh");
-    $Text = $res . " Установка обновлений...";
+if($act === "setPermission"){
+    //  Изменение прав доступа к файлу в директории upgrade.
+    //exec("chmod +x README.md");
+    //  Изменение прав доступа всего каталога upgrade.
+    exec("chmod -R 777 .");
+    $Text = "Перемещение новых файлов...";
     $NextAction = "moveFiles";
     sleep(1);
 }
 
-//  Позиционирование файлов по нужным папкам.
 if($act === "moveFiles"){
-    //$Text = shell_exec('sudo ./update.sh');
-    //$Text = shell_exec("/var/www/html/service/update.sh 2>&1");
-    $res = exec("/var/www/html/service/ret/service/bash/move_files.sh");
-    $Text = $res . " Установка обновлений окончена!";
+    //  Копирование файлов из каталога upgrade в корневой каталог сервера.(/var/www/html/)
+    exec("cp html/index.html ../");
+    exec("cp -r html/client ../");
+    exec("cp -r html/vendor ../");
+
+    exec("cp serial/gkv_udp_send ../");
+
+    exec("cp service/php/update.php ./");
+    
+    $Text = "Перемещение новых файлов...";
     $NextAction = 0;
-    sleep(1);
-}*/
+    sleep(2);
+}
 
 $response = array(
     "text" => $Text,
