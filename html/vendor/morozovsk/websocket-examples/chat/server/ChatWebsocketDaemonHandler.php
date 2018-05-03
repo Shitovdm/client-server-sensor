@@ -12,6 +12,7 @@ class ChatWebsocketDaemonHandler extends \morozovsk\websocket\Daemon
     protected $counter = 0;
     protected $direction = false;
     protected $demon_enable = false;
+    protected $serial_start = false;
     
     /**
      * Worked converting method.
@@ -50,8 +51,8 @@ class ChatWebsocketDaemonHandler extends \morozovsk\websocket\Daemon
             $inv_data = bin2hex($pkt)[6].bin2hex($pkt)[7].bin2hex($pkt)[4].bin2hex($pkt)[5].bin2hex($pkt)[2].bin2hex($pkt)[3].bin2hex($pkt)[0].bin2hex($pkt)[1];
 
             $angularVelocity = round($this->hex2float($inv_data), 2);
-            echo $angularVelocity . "\n";
-            $this->toClients($angularVelocity);
+            //  echo $angularVelocity . "\n";
+            $this->toClients($angularVelocity); //  Отправка данных клиентам.
             return $angularVelocity;
 
         } while ($pkt !== false);
@@ -74,7 +75,16 @@ class ChatWebsocketDaemonHandler extends \morozovsk\websocket\Daemon
     }
 
     //  Вызывается при соединении с новым клиентом
-    public function onOpen($connectionId, $info) {
+    public function onOpen($connectionId, $info) { 
+        //  Программа чтения данных с порта стартует при первом подключении клиента и продолжает работать демоном.
+        if($this->serial_start == false){
+            $this->serial_start = true;
+            echo("Opening serial... \n");
+            exec("./serial_start.sh > /dev/null 2>&1 &");
+        }else{
+            echo("Serial is open. \n");
+        }
+        
         //  Уведомляем клинтов, что открыт порт.
         foreach ($this->clients as $clientId => $client) {
             $this->sendToClient($clientId, "COM-порт на сервере открыт.");
@@ -100,7 +110,6 @@ class ChatWebsocketDaemonHandler extends \morozovsk\websocket\Daemon
     }
     
     protected function onMasterClose($connectionId) {
+        
     }
-    
-    
 }

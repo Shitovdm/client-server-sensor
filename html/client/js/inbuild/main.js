@@ -132,8 +132,7 @@ $('#dark-theme').on("change",function(){
     $("input[type='checkbox'] + label::before").css("border","1px solid #6f6f6f");
     $("input[type='checkbox'] + label::after").css("border","1px solid #6f6f6f");
     
-    
-    //  оСНОВНАЯ СТРАНЦА
+    //  Основная страница
     $("#meter").css("border-radius","10px");
     $(".sevenSeg-svg").css("background-color","#424242!important");
     $(".sevenSeg-svg").css("fill","#808080!important");
@@ -148,11 +147,11 @@ $('#dark-theme').on("change",function(){
     $("#save-stat-icon").attr("src", "client/img/icons/saveAs_white.png");
     
     $(".trigger-control").css("border", "1px solid #808080");
-    
-    
     $("#meter").css("background-color","#424242!important");
     $(".sevenSeg-svg").css({fill:"#505050"});
- 
+    
+    
+    
 }); 
 
 // Убираем окно настроек.
@@ -264,23 +263,27 @@ var meter_needle = document.querySelector('#meter_needle');
 
 function range_change_event(value) {
     var percent = value;
+    var digit = 0;
     //var percent = 20;
     var angle = 0;
     //  Граничные значения поворота стрелки.
     if(percent > limit){  //  Крайнее правое положение.
         angle = 90.0;
+        digit = limit;
     }else{
         if(percent < -limit){ //  Кранее левое положение.
             angle = -90.0;
+            digit = -limit;
         }else{
             angle = (percent * 90) / limit;
+            digit = angle;
         }
     }
     //  Поворачиваем стрелку.
     meter_needle.style.transform = 'rotate(' + angle + 'deg)';
     //console.log(value);
     //  Изменяем семисегментное значение.
-    $("#exampleArray").sevenSeg({ value: angle.toFixed(1) }); 
+    $("#exampleArray").sevenSeg({ value: digit.toFixed(1) }); 
 }
 
 var value = 0;  //  Значение.
