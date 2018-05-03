@@ -100,7 +100,6 @@ class ChatWebsocketDaemonHandler extends \morozovsk\websocket\Daemon
     }
     
     protected function onMasterClose($connectionId) {
-        $this->COM->deviceClose();
     }
     
     

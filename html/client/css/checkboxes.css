@@ -1,0 +1,65 @@
+/* прячем стандартный чекбокс */
+input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-field{
+    width: 20%!important;
+    margin-left: 125px;
+}
+
+/* стили для метки */
+input[type="checkbox"] + label {
+    cursor: pointer;
+    padding-left: 50px;
+    position: relative;
+    font-family: tahoma, sans-serif, arial;
+}
+
+/* стили для поля с бегунком*/
+input[type="checkbox"] + label::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    vertical-align: middle;
+    padding: 0;
+    height: 24px;
+    width: 48px;
+    margin: 0 5px 0 0;
+    border: 1px solid #dadada;
+    border-radius: 12px;
+    background: #dddddd;
+}
+
+/* стили для бегунка*/
+input[type="checkbox"] + label::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 22px;
+    height: 22px;
+    border-radius: 22px;
+    background: #fff;
+    border: 1px solid #dadada;
+    box-shadow: 0 3px 3px rgba(140, 140, 140, .1);
+}
+
+/* плавность )) */
+input[type="checkbox"] + label::before,
+input[type="checkbox"] + label::after {
+    -webkit-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+/* чекнутое состояние )) */
+input[type="checkbox"]:checked + label::before {
+    background: #6bbf6e;
+    border-color: #6dd75e;
+}
+input[type="checkbox"]:checked + label::after {
+    left: 25px;
+}

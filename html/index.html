@@ -8,17 +8,16 @@
     <link rel="stylesheet" href="client/css/style.css">
     <link rel="stylesheet" type="text/css" href="client/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="client/css/rangeslider.css">
-    <link rel="stylesheet" type="text/css" href="client/css/iphone-style-checkboxes.css">
+    <link rel="stylesheet" type="text/css" href="client/css/checkboxes.css">
     <!-- JS.-->
     <script type="text/javascript" src="client/js/native/jquery.min.js"></script>
     <script type="text/javascript" src="client/js/native/jquery-ui.min.js"></script>
     <script type="text/javascript" src="client/js/native/bootstrap.min.js"></script>
     <script type="text/javascript" src="client/js/native/knockout-2.2.1.js"></script>
     <script type="text/javascript" src="client/js/inbuild/seven-segments.js"></script>
-    <script type="text/javascript" src="client/js/native/iphone-style-checkboxes.js"></script>
 </head>
-
-<body>
+    
+<body class="body">
     <div id="wrapper">
 	<svg id="meter">
 	    <circle id="outline_curves" class="circle outline"  cx="50%" cy="50%"></circle>
@@ -46,8 +45,6 @@
             <text id="division_1_3" class="text" x="430" y="-515" font-size="20" font-weight="bold" font-family="Avenir, Helvetica, sans-serif" fill="#808080">10</text>
             
             <!-- Остальной текст -->
-            
-            
 	    <circle id="outline_ends" class="circle outline" cx="50%" cy="50%"></circle>
 	</svg>
         
@@ -59,17 +56,16 @@
         <!-- Left half of circle half.-->
         <div class="control-panel">
             
-            
             <!-- Limit trigger.-->
             <div class="trigger-control">
-                <div class="trigger-act trigger-toUp" onclick="setLimit(1)" title="Увеличить"><img src="client/img/icons/toUp.png" width="30px;"></div>
+                <div class="trigger-act trigger-toUp" onclick="setLimit(1)" title="Увеличить"><img id="toUp-limit" src="client/img/icons/toUp.png" width="30px;"></div>
                 <div id="setLimit-value" title="Значение предела измерения">30</div>
-                <div class="trigger-act trigger-toDown" onclick="setLimit(0)" title="Уменьшить"><img src="client/img/icons/toDown.png" width="30px;"></div>
+                <div class="trigger-act trigger-toDown" onclick="setLimit(0)" title="Уменьшить"><img id="toDown-limit" src="client/img/icons/toDown.png" width="30px;"></div>
                 <div class="clear"></div>
             </div>
             <div class="trigger-control buttons">
-                <div class="trigger-act" onclick="saveAs()" title="Сохранить"><img src="client/img/icons/saveAs.png" width="30px;"></div>
-                <div class="trigger-act" id="show-settings" title="Настройки"><img src="client/img/icons/settings.png" width="30px;"></div>
+                <div class="trigger-act" onclick="saveAs()" title="Сохранить"><img id="save-stat-icon" src="client/img/icons/saveAs.png" width="30px;"></div>
+                <div class="trigger-act" id="show-settings" title="Настройки"><img id="setings-icon" src="client/img/icons/settings.png" width="30px;"></div>
                 <div class="clear"></div>
             </div>
             
@@ -81,7 +77,6 @@
             <div class="fraction"></div>
             <div class="value_title">мин</div>
         </div>
-        
         <div class="rivet rever-1"></div>
         <div class="rivet rever-2"></div>
         <div class="rivet rever-3"></div>
@@ -89,11 +84,10 @@
         
     </div>
     
-    
     <!-- Settings window.-->
     <div class="settings" id="settings">
         <div class="settings-param">
-            <div class="settings-param-title">Плавность хода стрелки:</div>
+            <div class="settings-param-title">Отзывчивость стрелки:</div>
             <div class="settings-param-value">
                 <input type="range" min="1" max="100" value="50" class="range-slider" id="sensitivity-arrows">
             </div>
@@ -117,18 +111,18 @@
             </div>
         </div>
         <div class="settings-param" style="top:320px; padding: 20px 0px;">
-            <div class="settings-param-title">Темное оформление:</div>
+            <div class="settings-param-title">Предел измерений:</div>
             <div class="settings-param-value">
-                <input type="checkbox" id="dark-theme" />
+                <input type="range" step="15" min="30" max="300" value="30" class="range-slider" id="measuarement_limit">
             </div>
         </div>
         <div class="settings-param" style="top:390px; padding: 20px 0px;">
-            <div class="settings-param-title">Оповещать об ошибках:</div>
-            <div class="settings-param-value">
-                <input type="checkbox" id="display-error" />
-            </div>
+            <div class="settings-param-title">Темное оформление:</div>
+            <div class="settings-param-value checkbox-field">
+                <input id="dark-theme" type="checkbox">
+                <label for="dark-theme"></label>
+            </div> 
         </div>
-        
         <div class="settings-param" style="top:460px; padding: 17px 0px; border-bottom: none;">
             <div class="settings-param-title" style="margin-top: 10px;">Проверить наличие обновлений:</div>
             <div class="settings-param-value">
@@ -149,6 +143,15 @@
         <div class="clear"></div>
     </div>
     
+    <!-- Maximize settings -->
+    <div class="act-button-settings minimize-button" id="minimize-settings">
+        <img src="client/img/icons/moveToDown.png" width="50px">
+    </div>
+    <div class=" act-button-settings maximize-button" id="maximize-settings">
+        <img src="client/img/icons/moveToDown.png" width="50px">
+    </div>
+    
+    <!-- Background curtain -->
     <div class="background-curtain">.</div>
     <div class="update-window">
         <div class="uptade-preloader"><img src="client/img/preloaders/glass-spheres.gif"></div>

@@ -1,8 +1,10 @@
 /* set radius for all circles */
 var r = 200;
 var limit = 30;     //  +-30 град/мин.
+var data_frequency = 100;
+var sensitivity_arrows = 50;
 
-//  Диапазоны измерения.
+//  Изменение предела измерений из главного окна, просто +-15 при каждом нажатии.
 function setLimit(act){
     if(limit === 300 && act === 1){
     }else{
@@ -24,23 +26,47 @@ function setLimit(act){
     $("#division_3_3").text(limit);
     $("#division_2_3").text((limit/3)*2);
     $("#division_1_3").text(limit/3);
-
     $("#division_M3_3").text(-limit);
     $("#division_M2_3").text(-(limit/3)*2);
     $("#division_M1_3").text(-limit/3);
-    
-    console.log("Set new limit: ",limit);
+    $('#measuarement_limit').val(limit);
 }
 
-
-
-$(document).ready(function() {
-    $(':checkbox').iphoneStyle();
-});
+//  Регулировка чувствительности стрелки.
 $('#sensitivity-arrows').on("change",function(){
+     //sensitivity_arrows = this.value;
+     $("#meter_needle").css("transition-duration", (1 - (this.value / 100)) + "s"); 
+}); 
+
+//  Регулировка уровня помех.
+$('#interference-correction').on("change",function(){
     console.log(this.value);
 }); 
 
+//  Частота обновления цифровых значений.
+$('#filtering-digital').on("change",function(){
+    console.log(this.value);
+}); 
+
+//  Частота выдачи данных.
+$('#data_frequency').on("change",function(){
+    data_frequency = this.value;
+}); 
+
+//  Предел измерений.
+$('#measuarement_limit').on("change",function(){
+    limit = Number(this.value);
+    $("#setLimit-value").text(limit);
+    //  Изменяем значения на шкале.
+    $("#division_3_3").text(limit);
+    $("#division_2_3").text((limit/3)*2);
+    $("#division_1_3").text(limit/3);
+    $("#division_M3_3").text(-limit);
+    $("#division_M2_3").text(-(limit/3)*2);
+    $("#division_M1_3").text(-limit/3);
+}); 
+
+//  Сброс настроек к заводским.
 $('#default-button').on("click",function(){
     console.log("Все параметры выставлены по умолчанию.");
     $("#sensitivity-arrows").val(50);
@@ -50,35 +76,107 @@ $('#default-button').on("click",function(){
     
 }); 
 
-$("#dark-theme").change(function() {
-     if(this.checked) {
-         console.log("213");
-     }
- });
-
-$("#dark-theme").parent("div").on("click",function() {
-    console.log("we");
-    if($("#dark-theme").checked) {
-        console.log("ok");
-    }
+//  Стили при уменьшении окна настроек.
+$("#minimize-settings").on("click",function(){
+    $("#minimize-settings").css("display","none");
+    $(".settings .settings-param:nth-child(6)").css("display","none");
+    $(".settings .settings-param:nth-child(7)").css("display","none");
+    $(".settings").css({
+        "height":"393px",
+        "top":"-141px",
+        "border-radius":"0px 0px 10px 10px"
+    });
+    $(".settings-control").css("display","none");
+    $(".maximize-button").css("display","block");
 });
 
+//  Изменяем стрила при установке исходного изображения окна настроек.
+$("#maximize-settings").on("click",function(){
+    $(".maximize-button").css("display","none");
+    $(".settings").css({
+        "height":"600px",
+        "top":"-601px",
+        "border-radius":"10px"
+    });
+    //  Задержка перед появлением кнопок.
+    setTimeout(function(){
+        $("#minimize-settings").css("display","block");
+        $(".settings .settings-param:nth-child(6)").css("display","block");
+        $(".settings .settings-param:nth-child(7)").css("display","block");
+        $(".settings-control").css("display","block");
+    },450); 
+});
 
+//  Изменение цветов темной темы.
+$('#dark-theme').on("change",function(){
+    $(".body").css("background-color","#303030");
+    $(".settings").css("background-color","#424242;!important");
+    $(".settings-param-title").css("color","#d8d8d8");
+    $(".range-slider::-webkit-slider-runnable-track").css("background-color","#6f6f6f");
+    
+    $(".range-slider::-webkit-slider-thumb").css("background-color","#b9b9b9!important");
+    $(".range-slider::-webkit-slider-thumb:hover").css("background-color","#b1b1b1!important");
+    
+    //  Кнопки.
+    $(".update-button").css("background-color","#37474F!important");
+    $(".update-button:hover").css("background-color","#888888!important");
+    
+    $("#save-button").css("background-color","#263238!important");
+    $("#default-button").css("background-color","#37474F!important");
+    $("#exit-button").css("background-color","#6DA7A2!important");
+    $(".settings-control-action").css("color","#d8d8d8");
+    
+    //  Чекбоксы.
+    $("input[type='checkbox'] + label::before").css("background-color","#6f6f6f");
+    $("input[type='checkbox'] + label::after").css("background-color","#b9b9b9");
+    $("input[type='checkbox'] + label::before").css("border","1px solid #6f6f6f");
+    $("input[type='checkbox'] + label::after").css("border","1px solid #6f6f6f");
+    
+    
+    //  оСНОВНАЯ СТРАНЦА
+    $("#meter").css("border-radius","10px");
+    $(".sevenSeg-svg").css("background-color","#424242!important");
+    $(".sevenSeg-svg").css("fill","#808080!important");
+    
+    $(".rivet").css("box-shadow","5px 3px 20px rgba(62,62,62,0.3), -5px -10px 20px rgba(0,0,0,0.5)");
+    $(".rivet").css("background","radial-gradient(farthest-side ellipse at top left, #808080, #aaaaaa)");
+    $(".control-panel").css("border","1px dashed #424242");
+    
+    $("#toUp-limit").attr("src", "client/img/icons/toUp_white.png");
+    $("#toDown-limit").attr("src", "client/img/icons/toDown_white.png");
+    $("#setings-icon").attr("src", "client/img/icons/settings_white.png");
+    $("#save-stat-icon").attr("src", "client/img/icons/saveAs_white.png");
+    
+    $(".trigger-control").css("border", "1px solid #808080");
+    
+    
+    $("#meter").css("background-color","#424242!important");
+    $(".sevenSeg-svg").css({fill:"#505050"});
+ 
+}); 
+
+// Убираем окно настроек.
 $("#exit-button").click(function() {
   $("#settings").fadeOut("fast", function() {});
-  //$("#settings").css("display","none");
+  $(".maximize-button").css("display","none");
+  $(".minimize-button").css("display","none");
 });
 
+//  Показываем окно с настройками.
 $("#show-settings").click(function() {
   $("#settings").fadeIn("fast", function() {});
-  //$("#settings").css("display","block");
+  $(".maximize-button").css("display","none");
+  $(".minimize-button").css("display","block");
+  
 });
 
+//  Отмена установки обновлений.
 $("#confirm-no").click(function() {
     $(".update-window").css("display","none"); 
     $(".background-curtain").css("display","none");
 });
 
+//  Подтверждение установки обновлений.
 $("#confirm-yes").click(function() {
     $(".confirm-update").css("display","none"); 
     $(".uptade-preloader").css("display","block");
@@ -87,6 +185,7 @@ $("#confirm-yes").click(function() {
     ajaxRequert("checkConnection");
 });
 
+//  Подтверждение выхода из окна настроек.
 $("#confirm-ok").click(function() {
     $(".update-window").css("display","none"); 
     $(".background-curtain").css("display","none");
@@ -120,6 +219,7 @@ function ajaxRequert(action){
     });
 }
 
+//  При нажатии на кнопку "обновить".
 function cloudUpdateConfirmation(){
     $(".update-window").css("display","block");
     $(".background-curtain").css("display","block");
@@ -187,12 +287,12 @@ var value = 0;  //  Значение.
 
  $("#exampleArray").sevenSeg({ digits: 4, value: 0 });       
  
+ // Определение функций вебсокетного соединения.
  $(function(){
     $("#exampleArray").sevenSeg({ value: "----" }); 
     function wsStart() {
-        //ws = new WebSocket("ws://10.42.0.1:8002/");
-        //ws = new WebSocket("ws://192.168.1.41:8002/");
-        ws = new WebSocket("ws://192.168.42.1:8002/");
+        ws = new WebSocket("ws://192.168.1.40:8002/");
+        //ws = new WebSocket("ws://10.3.141.1:8002/");
         ws.onopen = function() { 
             console.log("Соединение успешно открыто.");
             console.log("Начало передачи данных.");
@@ -208,7 +308,10 @@ var value = 0;  //  Значение.
             if(evt.data !== undefined && evt.data !== null && evt.data !== "COM-порт на сервере успешно открыт."){
                 var value = (evt.data * 60).toFixed(1); // град/мин.
                 range_change_event(value);
-                ws.send("1");
+                setTimeout(function(){
+                    ws.send("1");
+                }, (500 - (data_frequency*5)) );
+                
             }
         };
     }

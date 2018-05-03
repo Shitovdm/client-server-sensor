@@ -55,7 +55,7 @@ if($act === "moveFiles"){
 
     exec("cp service/php/update.php ./");
     
-    $Text = "Обновления успешно установлены.";
+    $Text = "Перемещение новых файлов...";
     $NextAction = 0;
     sleep(2);
 }
