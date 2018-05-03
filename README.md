@@ -239,11 +239,42 @@ do {
 <h3>Raspbian </h3>
 
 **Issues**
-1. Uncaught Error: Call to undefined mb_check_encoding
+1. Uncaught Error: Call to undefined mb_check_encoding  
 **Solution:**  
 ```
 sudo apt-get install php7.0-mbstring
 sudo service apache2 restart
 ```
+
+/etc/rc.local  
+```
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# Print the IP address
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+echo 1 > /proc/sys/net/ipv4/ip_forward #RASPAP
+iptables -t nat -A POSTROUTING -j MASQUERADE #RASPAP
+sudo bash /var/www/html/service/bash/shutdown.sh &
+cd /var/www/html/vendor/morozovsk/websocket-examples/chat/server
+php index.php start &
+exit 0
+```  
+
+
 
 
