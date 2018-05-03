@@ -235,4 +235,15 @@ do {
     //stream_socket_sendto($socket, date("D M j H:i:s Y\r\n"), 0, $peer);
 } while ($pkt !== false);
 ***  
-Test use
+
+<h3>Raspbian </h3>
+
+**Issues**
+1. Uncaught Error: Call to undefined mb_check_encoding
+**Solution:**  
+```
+sudo apt-get install php7.0-mbstring
+sudo service apache2 restart
+```
+
+
