@@ -275,6 +275,19 @@ php index.php start &
 exit 0
 ```  
 
+**Intrfaces**  
+```
+source-directory /etc/network/interfaces.d
+auto lo
+iface lo inet loopback
+auto eth0
+allow-hotplug eth0
+iface eth0 inet dhcp
+allow-hotplug wlan0
+iface wlan0 inet static
+address 10.3.141.1
+netmask 255.255.255.0
+```
 
 
 
