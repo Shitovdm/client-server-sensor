@@ -9,7 +9,11 @@ This client-server application is designed to visualize data from the sensor on 
 ![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/Scheme-2.PNG)
 
 
-You should have Raspberry Pi 3 with installed system ubuntu-16.04. 
+You should have Raspberry Pi 3 with installed system ubuntu-16.04 or last version of Raspbian. 
+
+---
+
+<h3>Ubuntu-16.04</h3>
 
 <h3>Server Start</h3>
 
@@ -150,30 +154,7 @@ up iptables-restore < /etc/iptables.ipv4.nat
 ```sudo service hostapd status``` - hostapd status.  
 ```sudo service isc-dhcp-server status``` - isc-dhcp-server status.  
 
-<h3>Client</h3>
-
-1. Connect to Connector to access point.  
-2. Go to local server address(http://192.168.1.41).  
-
-
-<h3>Set up auto-update</h3>  
-1. Change permissions on all files and folders:  
-```
-sudo chmod -R 777 var/www/html
-```
-
-### Interface
-![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/client-r.png)  
-
-**Explanations:**
-1. Units (grad/min).  
-2. Change the measurement limit of the instrument(range: 30-300, every 15).  
-3. Digital indicator of the exact value.  
-4. Settings button.  
-5. Save all in log button.  
-6. Current measurement limit.  
-
-<h3>Possible problems:</h3>
+<h3>Possible issues:</h3>
 
 1. Timeout for connection search eth0 in 5 minutes at system start.  
 **Solution**:  
@@ -211,34 +192,100 @@ sudo bash /home/mplab/sys/shutdown.sh
 **Solution:**  
 Use external adapter CP2102 UART<->USB.  
 
-<h3>Resources:</h3>  
+---
 
->> **https://github.com/morozovsk/websocket** - PHP Websocket Class.  
->> **https://github.com/Xowap/PHP-Serial** - PHP Serial Class.  
->> **https://github.com/hongkiat/svg-meter-gauge** - Simple SVG-meter.  
->> **https://github.com/meetanthony/crcphp** - Calculating CRC32 Class.  
->> **https://wiki.ubuntu.com/ARM/RaspberryPi** - ubuntu-18.04-preinstalled-server-armhf+raspi3.img.xz (4G image, 295M compressed).  
->> **http://academicfox.com/raspberry-pi-besprovodnaya-tochka-dostupa-wifi-access-point/** - Hotspot on RasPi3.
+<h3>Raspbian</h3>
 
+<h3>Server Start</h3>
 
+1. Install LAMP Server:  
+```sudo apt-get install apache2 -y```  
+```sudo a2enmod rewrite```  
+```sudo service apache2 restart``` 
+```sudo nano /etc/apache2/apache2.conf```  
+```  
+<Directory /var/www/>  
+ Options Indexes FollowSymLinks  
+ AllowOverride All  
+ Require all granted  
+</Directory>  
+```  
+```sudo service apache2 restart```  
 
-Connection to UDP socket:
-***
-$socket = stream_socket_server("udp://127.0.0.1:1234", $errno, $errstr, STREAM_SERVER_BIND);
-if (!$socket) {
-    die("$errstr ($errno)");
-}
+ 2. Install PHP:  
+ ```sudo apt-get install php libapache2-mod-php -y```  
+ 
+ 3. Setup FTP:  
+ ```sudo apt-get install vsftpd -y```  
+ ```sudo nano /etc/vsftpd.conf```  
+ ```  
+ #local_enable=YES  
+ #ssl_enable=NO  
+ # CUSTOM  
+ ssl_enable=YES  
+ local_enable=YES  
+ chroot_local_user=YES  
+ local_root=/var/www  
+ user_sub_token=pi  
+ write_enable=YES  
+ local_umask=002  
+ allow_writeable_chroot=YES  
+ ftpd_banner=Welcome to my Raspberry Pi FTP service.  
+ ```  
+ ```sudo usermod -a -G www-data pi```  
+ ```sudo usermod -m -d /var/www pi```  
+ ```sudo chown -R www-data:www-data /var/www```  
+ ```sudo chmod -R 775 /var/www```  
+ ```sudo service vsftpd restart```  
+ 
+ **Use to connect:**  
+ - Host – 192.xxx.x.xxx (IP address of your Pi with no prefix)  
+ - Port – 21  
+ - Protocol – FTP (File Transfer Protocol)  
+ - Encryption – Use explicit FTP over TLS if available  
+ - Logon Type – Normal (username & password)  
+ - Username – pi  
+ - Password – yourPass  
 
-do {
-    $pkt = stream_socket_recvfrom($socket, 1, 0, $peer);
-    echo $pkt."\n";
-    //stream_socket_sendto($socket, date("D M j H:i:s Y\r\n"), 0, $peer);
-} while ($pkt !== false);
-***  
+<h3>Wi-Fi Hotspot Setup</h3>
 
-<h3>Raspbian </h3>
+1. Install Raspap:  
+```wget -q https://git.io/voEUQ -O /tmp/raspap && bash /tmp/raspap```  
 
-**Issues**
+2. Install hostapd:  
+```sudo apt-get install hostapd isc-dhcp-server```  
+
+3. Customize interfaces.d:  
+``` sudo nano /etc/network/interfaces.d```  
+```
+auto lo
+iface lo inet loopback
+auto eth0
+allow-hotplug eth0
+iface eth0 inet dhcp
+allow-hotplug wlan0
+iface wlan0 inet static
+address 10.3.141.1
+netmask 255.255.255.0
+```
+
+<h3>Set up auto-update</h3>  
+
+1. Change permissions on all files and folders:  
+```sudo chmod -R 777 var/www/html```  
+
+2. Change owner for all files and folders in server dir:  
+```cd /var/www/html```  
+```sudo chmod www-data:www-data .```  
+
+3. Create new local repo in ```var/www/html/upgrade```  
+
+<h3>Important</h3>  
+Do not forget to rename default ```/var/www/html``` to arbitrary name.  
+By default ```/var/www/html``` contain Raspap GUI web-interface.  
+Create new html folder and place all files from whis repo.  
+
+<h3>Issues</h3>
 1. Uncaught Error: Call to undefined mb_check_encoding  
 **Solution:**  
 ```
@@ -246,7 +293,37 @@ sudo apt-get install php7.0-mbstring
 sudo service apache2 restart
 ```
 
-/etc/rc.local  
+---
+
+After all the manipulations, you should get in ```var/www/html``` a similar structure:
+
+> client  
+>> css  
+>> img  
+>> js  
+>> svg  
+
+> service  
+>> bash  
+>> img  
+>> php  
+
+> upgrade  
+>> html  
+>> serial  
+>> service  
+>> update.php
+
+> vendor  
+>> composer  
+>> morozovsk  
+>> autoload.php  
+
+> gkv_udp_send  
+> index.html  
+> serial_start.sh  
+
+**To start the autorun, edit the file ```/etc/rc.local```**  
 ```
 #!/bin/sh -e
 #
@@ -274,20 +351,33 @@ cd /var/www/html/vendor/morozovsk/websocket-examples/chat/server
 php index.php start &
 exit 0
 ```  
+---
 
-**Intrfaces**  
-```
-source-directory /etc/network/interfaces.d
-auto lo
-iface lo inet loopback
-auto eth0
-allow-hotplug eth0
-iface eth0 inet dhcp
-allow-hotplug wlan0
-iface wlan0 inet static
-address 10.3.141.1
-netmask 255.255.255.0
-```
+<h3>Client</h3>
 
+1. Connect to access point.  
+2. Go to local server address(http://192.168.1.41).  
 
+### Interface
+![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/client-r.png)  
 
+**Explanations:**
+1. Units (grad/min).  
+2. Change the measurement limit of the instrument(range: 30-300, every 15).  
+3. Digital indicator of the exact value.  
+4. Settings button.  
+5. Save all in log button.  
+6. Current measurement limit.  
+
+---
+
+<h3>Resources:</h3>  
+
+>> **https://github.com/morozovsk/websocket** - PHP Websocket Class.  
+>> **https://github.com/Xowap/PHP-Serial** - PHP Serial Class.  
+>> **https://github.com/hongkiat/svg-meter-gauge** - Simple SVG-meter.  
+>> **https://github.com/meetanthony/crcphp** - Calculating CRC32 Class.  
+>> **https://wiki.ubuntu.com/ARM/RaspberryPi** - ubuntu-18.04-preinstalled-server-armhf+raspi3.img.xz (4G image, 295M compressed).  
+>> **http://academicfox.com/raspberry-pi-besprovodnaya-tochka-dostupa-wifi-access-point/** - Hotspot on RasPi3.
+>> **https://github.com/billz/raspap-webgui** - Hotspot RPI Raspbian.  
+>> **https://howtoraspberrypi.com/create-a-wi-fi-hotspot-in-less-than-10-minutes-with-pi-raspberry/** - Hotspot RPI Raspbian.
