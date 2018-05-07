@@ -357,6 +357,9 @@ exit 0
 2. Go to local server address(http://192.168.1.41).  
 
 ### Interface
+
+![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/interface-2.png)  
+
 ![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/client-r.png)  
 
 **Explanations:**
