@@ -286,6 +286,7 @@ By default ```/var/www/html``` contain Raspap GUI web-interface.
 Create new html folder and place all files from whis repo.  
 
 <h3>Issues</h3>
+
 1. Uncaught Error: Call to undefined mb_check_encoding  
 **Solution:**  
 ```
@@ -296,32 +297,29 @@ sudo service apache2 restart
 ---
 
 After all the manipulations, you should get in ```var/www/html``` a similar structure:
-
-> client  
->> css  
->> img  
->> js  
->> svg  
-
-> service  
->> bash  
->> img  
->> php  
-
-> upgrade  
->> html  
->> serial  
->> service  
->> update.php
-
-> vendor  
->> composer  
->> morozovsk  
->> autoload.php  
-
-> gkv_udp_send  
-> index.html  
-> serial_start.sh  
+```
+client  
+  css  
+  img  
+  js  
+  svg  
+service  
+  bash  
+  img  
+  php  
+upgrade  
+  html  
+  serial  
+  service  
+  update.php
+vendor  
+  composer  
+  morozovsk  
+  autoload.php  
+gkv_udp_send  
+index.html  
+serial_start.sh  
+```  
 
 **To start the autorun, edit the file ```/etc/rc.local```**  
 ```
