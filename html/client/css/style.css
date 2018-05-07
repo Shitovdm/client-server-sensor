@@ -12,9 +12,9 @@ body{
     box-shadow: 0 0 15px 3px #6E6E6E;
 }
 #meter {
-    width: 100%; height: 100%;
+    width: 100%; 
+    height: 100%;
     transform: rotateX(180deg);
-
 }
 .text{
     transform: rotateX(180deg);
@@ -325,6 +325,7 @@ input[type=range]:focus::-ms-fill-upper {
     width: 50%;
     float: left;
     text-align: center;
+    user-select: none;
 }
 
 .settings-param-title{
@@ -334,6 +335,7 @@ input[type=range]:focus::-ms-fill-upper {
     margin-left: 20px;
     font-size: 18px;
     margin-top: 3px;
+    user-select: none;
 }
 
 .settings-control{
@@ -343,6 +345,7 @@ input[type=range]:focus::-ms-fill-upper {
     border-top:1px solid #808080;
     position: absolute;
     bottom: 0px;
+    user-select: none;
 }
 
 .settings-control-action{
@@ -499,6 +502,7 @@ input[type=range]:focus::-ms-fill-upper {
     opacity: 0.5;
     padding: 10px 0px;
     cursor: pointer;
+    user-select: none;
 }
 
 .minimize-button{

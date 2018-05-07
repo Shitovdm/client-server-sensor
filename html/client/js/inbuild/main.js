@@ -3,6 +3,7 @@ var r = 200;
 var limit = 30;     //  +-30 град/мин.
 var data_frequency = 100;
 var sensitivity_arrows = 50;
+var dark_theme = false;
 
 //  Изменение предела измерений из главного окна, просто +-15 при каждом нажатии.
 function setLimit(act){
@@ -67,14 +68,13 @@ $('#measuarement_limit').on("change",function(){
 }); 
 
 //  Сброс настроек к заводским.
-$('#default-button').on("click",function(){
+function resetParams(){
     console.log("Все параметры выставлены по умолчанию.");
     $("#sensitivity-arrows").val(50);
     $("#interference-correction").val(20);
     $("#filtering-digital").val(50);
     $("#data_frequency").val(100);
-    
-}); 
+}
 
 //  Стили при уменьшении окна настроек.
 $("#minimize-settings").on("click",function(){
@@ -109,49 +109,93 @@ $("#maximize-settings").on("click",function(){
 
 //  Изменение цветов темной темы.
 $('#dark-theme').on("change",function(){
-    $(".body").css("background-color","#303030");
-    $(".settings").css("background-color","#424242;!important");
-    $(".settings-param-title").css("color","#d8d8d8");
-    $(".range-slider::-webkit-slider-runnable-track").css("background-color","#6f6f6f");
-    
-    $(".range-slider::-webkit-slider-thumb").css("background-color","#b9b9b9!important");
-    $(".range-slider::-webkit-slider-thumb:hover").css("background-color","#b1b1b1!important");
-    
-    //  Кнопки.
-    $(".update-button").css("background-color","#37474F!important");
-    $(".update-button:hover").css("background-color","#888888!important");
-    
-    $("#save-button").css("background-color","#263238!important");
-    $("#default-button").css("background-color","#37474F!important");
-    $("#exit-button").css("background-color","#6DA7A2!important");
-    $(".settings-control-action").css("color","#d8d8d8");
-    
-    //  Чекбоксы.
-    $("input[type='checkbox'] + label::before").css("background-color","#6f6f6f");
-    $("input[type='checkbox'] + label::after").css("background-color","#b9b9b9");
-    $("input[type='checkbox'] + label::before").css("border","1px solid #6f6f6f");
-    $("input[type='checkbox'] + label::after").css("border","1px solid #6f6f6f");
-    
-    //  Основная страница
-    $("#meter").css("border-radius","10px");
-    $(".sevenSeg-svg").css("background-color","#424242!important");
-    $(".sevenSeg-svg").css("fill","#808080!important");
-    
-    $(".rivet").css("box-shadow","5px 3px 20px rgba(62,62,62,0.3), -5px -10px 20px rgba(0,0,0,0.5)");
-    $(".rivet").css("background","radial-gradient(farthest-side ellipse at top left, #808080, #aaaaaa)");
-    $(".control-panel").css("border","1px dashed #424242");
-    
-    $("#toUp-limit").attr("src", "client/img/icons/toUp_white.png");
-    $("#toDown-limit").attr("src", "client/img/icons/toDown_white.png");
-    $("#setings-icon").attr("src", "client/img/icons/settings_white.png");
-    $("#save-stat-icon").attr("src", "client/img/icons/saveAs_white.png");
-    
-    $(".trigger-control").css("border", "1px solid #808080");
-    $("#meter").css("background-color","#424242!important");
-    $(".sevenSeg-svg").css({fill:"#505050"});
-    
-    
-    
+    if(dark_theme === false){
+        dark_theme = true;
+        //  Стили для темной темы.
+        $(".body").css("background-color","#303030");
+        $(".settings").css("background-color","#424242;!important");
+        $(".settings-param-title").css("color","#d8d8d8");
+        $(".range-slider::-webkit-slider-runnable-track").css("background-color","#6f6f6f");
+
+        $(".range-slider::-webkit-slider-thumb").css("background-color","#b9b9b9!important");
+        $(".range-slider::-webkit-slider-thumb:hover").css("background-color","#b1b1b1!important");
+
+        //  Кнопки.
+        $(".update-button").css("background-color","#37474F!important");
+        $(".update-button:hover").css("background-color","#888888!important");
+
+        $("#save-button").css("background-color","#263238!important");
+        $("#default-button").css("background-color","#37474F!important");
+        $("#exit-button").css("background-color","#6DA7A2!important");
+        $(".settings-control-action").css("color","#d8d8d8");
+
+        //  Чекбоксы.
+        $("input[type='checkbox'] + label::before").css("background-color","#6f6f6f");
+        $("input[type='checkbox'] + label::after").css("background-color","#b9b9b9");
+        $("input[type='checkbox'] + label::before").css("border","1px solid #6f6f6f");
+        $("input[type='checkbox'] + label::after").css("border","1px solid #6f6f6f");
+
+        //  Основная страница
+        $("#meter").css("border-radius","10px");
+        $(".sevenSeg-svg").css("background-color","#424242!important");
+        $(".sevenSeg-svg").css("fill","#808080!important");
+
+        $(".rivet").css("box-shadow","5px 3px 20px rgba(62,62,62,0.3), -5px -10px 20px rgba(0,0,0,0.5)");
+        $(".rivet").css("background","radial-gradient(farthest-side ellipse at top left, #808080, #aaaaaa)");
+        $(".control-panel").css("border","1px dashed #424242");
+
+        $("#toUp-limit").attr("src", "client/img/icons/toUp_white.png");
+        $("#toDown-limit").attr("src", "client/img/icons/toDown_white.png");
+        $("#setings-icon").attr("src", "client/img/icons/settings_white.png");
+        $("#save-stat-icon").attr("src", "client/img/icons/saveAs_white.png");
+
+        $(".trigger-control").css("border", "1px solid #808080");
+        $("#meter").css("background-color","#424242!important");
+        $(".sevenSeg-svg").css({fill:"#505050"});
+    }else{
+        dark_theme = false;
+        //  Стили для светлой темы.
+        $(".body").css("background-color","#ffffff");
+        $(".settings").css("background-color","#efefef;!important");
+        $(".settings-param-title").css("color","#333");
+        $(".range-slider::-webkit-slider-runnable-track").css("background-color","#F6F6F6");
+        
+        $(".range-slider::-webkit-slider-thumb").css("background-color","#fff!important");
+        $(".range-slider::-webkit-slider-thumb:hover").css("background-color","#F6F6F6!important");
+
+        //  Кнопки.
+        $(".update-button").css("background-color","#6bbf6e!important");
+        $(".update-button:hover").css("background-color","#4CAF50!important");
+        
+        $("#save-button").css("background-color","#6bbf6e!important");
+        $("#default-button").css("background-color","#ccc!important");
+        $("#exit-button").css("background-color","#E04644!important");
+        $(".settings-control-action").css("color","#f9f9f9");
+        
+        //  Чекбоксы.
+        $("input[type='checkbox'] + label::before").css("background-color","#dddddd");
+        $("input[type='checkbox'] + label::after").css("background-color","#fff");
+        $("input[type='checkbox'] + label::before").css("border","1px solid #dadada");
+        $("input[type='checkbox'] + label::after").css("border","1px solid #dadada");
+        
+        //  Основная страница
+        $("#meter").css("border-radius","10px");
+        $(".sevenSeg-svg").css("background-color","#efefef!important");
+        $(".sevenSeg-svg").css("fill","#e1e1e1!important");
+
+        $(".rivet").css("box-shadow","5px 3px 20px rgba(62,62,62,0.3), -5px -10px 20px rgba(255,255,255,0.5)");
+        $(".rivet").css("background","radial-gradient(farthest-side ellipse at top left, white, #aaaaaa)");
+        $(".control-panel").css("border","1px dashed #ccc");
+        
+        $("#toUp-limit").attr("src", "client/img/icons/toUp.png");
+        $("#toDown-limit").attr("src", "client/img/icons/toDown.png");
+        $("#setings-icon").attr("src", "client/img/icons/settings.png");
+        $("#save-stat-icon").attr("src", "client/img/icons/saveAs.png");
+
+        $(".trigger-control").css("border", "1px solid #ccc");
+        $("#meter").css("background-color","#efefef!important");
+        $(".sevenSeg-svg").css({fill:"#e1e1e1"});
+    }
 }); 
 
 // Убираем окно настроек.
@@ -216,6 +260,19 @@ function ajaxRequert(action){
             }
         }
     });
+}
+
+//  Функция сохранения пользовательских параметров.
+//  Делает запрос к серверу, который в свою очередь создает файл с пользовательскими настройками и сохраняет его.
+function saveUserParams(){
+    var sensitivity_arrows = $("#sensitivity-arrows").val();
+    var interference_correction = $("#interference-correction").val();
+    var filtering_digital = $("#filtering-digital").val();
+    var data_frequency = $("#data_frequency").val();
+    var measuarement_limit = $("#measuarement_limit").val();
+    
+    console.log(sensitivity_arrows, interference_correction, filtering_digital, data_frequency, measuarement_limit);
+    
 }
 
 //  При нажатии на кнопку "обновить".
@@ -294,8 +351,8 @@ var value = 0;  //  Значение.
  $(function(){
     $("#exampleArray").sevenSeg({ value: "----" }); 
     function wsStart() {
-        ws = new WebSocket("ws://192.168.1.40:8002/");
-        //ws = new WebSocket("ws://10.3.141.1:8002/");
+        //ws = new WebSocket("ws://192.168.1.40:8002/");
+        ws = new WebSocket("ws://10.3.141.1:8002/");
         ws.onopen = function() { 
             console.log("Соединение успешно открыто.");
             console.log("Начало передачи данных.");
