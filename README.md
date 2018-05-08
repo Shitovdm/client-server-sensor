@@ -1,15 +1,16 @@
-# client-server-sensor
+# Client:Server:Sensor
 
-This client-server application is designed to visualize data from the sensor on the client device.
+The system for determining the deviation from a given course. Provides the ability to visualize data from the angular velocity sensor.  As the server stands Raspberry Pi 3, configured to work in router mode. Client - any web browser.  
+Below is the general scheme for implementing the entire system.  
 
-### Generalized structural scheme
-![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/Scheme-1.PNG)
+### Generalized structural scheme  
+![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/Scheme_new.PNG)
 
-### Detailed structural scheme
-![screen](https://raw.githubusercontent.com/Shitovdm/client-server-sensor/master/service/img/Scheme-2.PNG)
+An alternative is to read the data from the sensor using PHP language.  
+But this method is slower and it was necessary to abandon its application.  
 
-
-You should have Raspberry Pi 3 with installed system ubuntu-16.04 or last version of Raspbian. 
+As an operating system for Raspberry Pi there can be chosen either Ubuntu-16.04 or Raspbian. A step-by-step configuration process for each system can be viewed below.  
+I recommend using Raspbian for 2 reasons. Firstly, the OS is optimized for working on Raspberry Pi. Secondly, the configuration process is much easier and will take less than an hour on average.
 
 ---
 
