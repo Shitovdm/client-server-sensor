@@ -323,8 +323,8 @@ index.html
 serial_start.sh  
 ```  
 
-Do not forget to copy QT libraries in ```usr/lib/```  
-List of libraries: **https://github.com/Shitovdm/client-server-sensor/master/service/other/listQtLib.txt**  
+Do not forget to copy QT libraries into ```usr/lib/```  
+List of libraries: **https://github.com/Shitovdm/client-server-sensor/blob/master/service/other/listQtLib.txt**  
 
 **To start the autorun, edit the file ```/etc/rc.local```**  
 ```
