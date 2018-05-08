@@ -296,6 +296,7 @@ sudo service apache2 restart
 ```
 
 ---
+<h3>Other</h3>
 
 After all the manipulations, you should get in ```var/www/html``` a similar structure:
 ```
@@ -321,6 +322,9 @@ gkv_udp_send
 index.html  
 serial_start.sh  
 ```  
+
+Do not forget to copy QT libraries in ```usr/lib/```  
+List of libraries: **https://github.com/Shitovdm/client-server-sensor/master/service/other/listQtLib.txt**  
 
 **To start the autorun, edit the file ```/etc/rc.local```**  
 ```
@@ -355,7 +359,7 @@ exit 0
 <h3>Client</h3>
 
 1. Connect to access point.  
-2. Go to local server address(http://192.168.1.41).  
+2. Go to local server address(http://10.3.141.1).  
 
 ### Interface
 
