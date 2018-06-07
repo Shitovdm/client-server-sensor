@@ -379,11 +379,11 @@ exit 0
 
 <h3>Resources:</h3>  
 
->> **https://github.com/morozovsk/websocket** - PHP Websocket Class.  
->> **https://github.com/Xowap/PHP-Serial** - PHP Serial Class.  
->> **https://github.com/hongkiat/svg-meter-gauge** - Simple SVG-meter.  
->> **https://github.com/meetanthony/crcphp** - Calculating CRC32 Class.  
->> **https://wiki.ubuntu.com/ARM/RaspberryPi** - ubuntu-18.04-preinstalled-server-armhf+raspi3.img.xz (4G image, 295M compressed).  
->> **http://academicfox.com/raspberry-pi-besprovodnaya-tochka-dostupa-wifi-access-point/** - Hotspot on RasPi3.
->> **https://github.com/billz/raspap-webgui** - Hotspot RPI Raspbian.  
->> **https://howtoraspberrypi.com/create-a-wi-fi-hotspot-in-less-than-10-minutes-with-pi-raspberry/** - Hotspot RPI Raspbian.
+> **https://github.com/morozovsk/websocket** - PHP Websocket Class.  
+> **https://github.com/Xowap/PHP-Serial** - PHP Serial Class.  
+> **https://github.com/hongkiat/svg-meter-gauge** - Simple SVG-meter.  
+> **https://github.com/meetanthony/crcphp** - Calculating CRC32 Class.  
+> **https://wiki.ubuntu.com/ARM/RaspberryPi** - ubuntu-18.04-preinstalled-server-armhf+raspi3.img.xz (4G image, 295M compressed).  
+> **http://academicfox.com/raspberry-pi-besprovodnaya-tochka-dostupa-wifi-access-point/** - Hotspot on RasPi3.
+> **https://github.com/billz/raspap-webgui** - Hotspot RPI Raspbian.  
+> **https://howtoraspberrypi.com/create-a-wi-fi-hotspot-in-less-than-10-minutes-with-pi-raspberry/** - Hotspot RPI Raspbian.
